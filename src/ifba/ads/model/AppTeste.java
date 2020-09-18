@@ -10,7 +10,7 @@ public class AppTeste {
 		ConfiguracaoDaUnidade configuracao2 = new ConfiguracaoDaUnidade();
 		ConfiguracaoDaUnidade configuracao3 = new ConfiguracaoDaUnidade();
 
-		/* Adicionando equipaento as essas configurações */
+		/* Adicionando equipamento as essas configurações */
 
 		configuracao.adicionarEquipamentosAUnidade(EquipamentoEnum.CAMERADEVIDEO);
 		configuracao.adicionarEquipamentosAUnidade(EquipamentoEnum.MEDIDORDEC02);
