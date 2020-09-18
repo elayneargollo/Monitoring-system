@@ -6,19 +6,19 @@ import java.util.Iterator;
 public class AreaMonitorada implements ComandarMonitoramento {
 
 	public ArrayList<UnidadeMovel> unidades = new ArrayList<>();
-	public ArrayList<UnidadeMovel> unidadeMovelQuePossuiRequisitosMinimos = new ArrayList<>();
+	public ArrayList<UnidadeMovel> unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento = new ArrayList<>();
 
 	public void requisitoMinimo(boolean cameraDeVideo, boolean termometro, boolean MedidordeCo2,
 			boolean medidorDeMetano) {
 
-		String equipamentosMinimo = equipamentosMinimos(cameraDeVideo, termometro, MedidordeCo2, medidorDeMetano)
+		String equipamentosMinimosParaMonitoramento = equipamentosMinimos(cameraDeVideo, termometro, MedidordeCo2, medidorDeMetano)
 				.toString();
 
-		equipamentosMinimo = equipamentosMinimo.replace("[", "");
-		equipamentosMinimo = equipamentosMinimo.replace("]", "");
+		equipamentosMinimosParaMonitoramento = equipamentosMinimosParaMonitoramento.replace("[", "");
+		equipamentosMinimosParaMonitoramento = equipamentosMinimosParaMonitoramento.replace("]", "");
 
-		if (equipamentosMinimo.equals("")) { // se ele n exigir, qlqr unidade serve =)
-			unidadeMovelQuePossuiRequisitosMinimos = unidades;
+		if (equipamentosMinimosParaMonitoramento.equals("")) { // se ele n exigir, qlqr unidade serve =)
+			unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento = unidades;
 		} else {
 
 			Iterator<UnidadeMovel> it = unidades.iterator();
@@ -32,8 +32,8 @@ public class AreaMonitorada implements ComandarMonitoramento {
 				conf = conf.replace("[", "");
 				conf = conf.replace("]", "");
 
-				if (conf.contains(equipamentosMinimo)) {
-					unidadeMovelQuePossuiRequisitosMinimos.add(atual);
+				if (conf.contains(equipamentosMinimosParaMonitoramento)) {
+					unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.add(atual);
 				}
 
 			}
@@ -48,23 +48,23 @@ public class AreaMonitorada implements ComandarMonitoramento {
 
 		requisitoMinimo(cameraDeVideo, termometro, MedidordeCo2, medidorDeMetano);
 		
-		float menorDistancia = unidadeMovelQuePossuiRequisitosMinimos.get(0).distanciaEntreOrigemEDestino(latitude,longitude);
-		UnidadeMovel unidade = unidadeMovelQuePossuiRequisitosMinimos.get(0);
+		float menorDistancia = unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.get(0).distanciaEntreOrigemEDestino(latitude,longitude);
+		UnidadeMovel unidadeQueIraSeDeslocar = unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.get(0);
 
-		for (int i = 0; i < unidadeMovelQuePossuiRequisitosMinimos.size(); i++) {
+		for (int i = 0; i < unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.size(); i++) {
 
-			float distanciaDestaUnidade = unidadeMovelQuePossuiRequisitosMinimos.get(i)
+			float distanciaDestaUnidade = unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.get(i)
 					.distanciaEntreOrigemEDestino(latitude, longitude);
 
 			if (menorDistancia > distanciaDestaUnidade) {
 				menorDistancia = distanciaDestaUnidade;
-				unidade = unidadeMovelQuePossuiRequisitosMinimos.get(i);
+				unidadeQueIraSeDeslocar = unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.get(i);
 			}
 
 		}
-		atualizarLocalizacao(unidade, latitude, longitude);
+		atualizarLocalizacao(unidadeQueIraSeDeslocar, latitude, longitude);
 
-		return "Unidade com identificador " + unidade.getId() + " transladada para o local solicitado";
+		return "Unidade com identificador " + unidadeQueIraSeDeslocar.getId() + " transladada para o local solicitado";
 	}
 
 	public ArrayList<EquipamentoEnum> equipamentosMinimos(boolean cameraDeVideo, boolean termometro,
