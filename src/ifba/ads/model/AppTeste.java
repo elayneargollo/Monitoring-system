@@ -29,7 +29,7 @@ public class AppTeste {
 		areaMonitorada.inserirUnidades(unidade3);
 		
 		
-		System.out.println(areaMonitorada.monitorar(7, 5, false, false, false, false));
+		System.out.println(areaMonitorada.monitorar(7, 5, true, false, false, false));
 
 		
 	}

@@ -17,6 +17,7 @@ public class AreaMonitorada implements ComandarMonitoramento {
 		equipamentosMinimosParaMonitoramento = equipamentosMinimosParaMonitoramento.replace("[", "");
 		equipamentosMinimosParaMonitoramento = equipamentosMinimosParaMonitoramento.replace("]", "");
 
+	
 		if (equipamentosMinimosParaMonitoramento.equals("")) { // se ele n exigir, qlqr unidade serve =)
 			unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento = unidades;
 		} else {
@@ -31,11 +32,16 @@ public class AreaMonitorada implements ComandarMonitoramento {
 
 				configuracoesDaUnidade = configuracoesDaUnidade.replace("[", "");
 				configuracoesDaUnidade = configuracoesDaUnidade.replace("]", "");
-
+		
 				if (configuracoesDaUnidade.contains(equipamentosMinimosParaMonitoramento)) {
 					unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.add(atual);
 				}
 
+			}		
+			
+			if (unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.size() == 0) {
+				System.out.println("Sistema não tem unidades com requisitos minimos exigidos");
+				System.exit(0);
 			}
 
 		}
