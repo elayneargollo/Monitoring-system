@@ -3,11 +3,11 @@ package ifba.ads.model;
 public abstract class UnidadeMovel {
 
 	public String id;
-	public long latitude;
-	public long longitude;
+	public float latitude;
+	public float longitude;
 	public ConfiguracaoDaUnidade configuracao;
 
-	public UnidadeMovel(String id, long latitude, long longitude, ConfiguracaoDaUnidade configuracao) {
+	public UnidadeMovel(String id, float latitude, float longitude, ConfiguracaoDaUnidade configuracao) {
 		super();
 		this.id = id;
 		this.latitude = latitude;
@@ -23,15 +23,15 @@ public abstract class UnidadeMovel {
 		this.id = id;
 	}
 
-	public long getLatitude() {
+	public float getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(long latitude) {
+	public void setLatitude(float latitude) {
 		this.latitude = latitude;
 	}
 
-	public long getLongitude() {
+	public float getLongitude() {
 		return longitude;
 	}
 
@@ -41,7 +41,7 @@ public abstract class UnidadeMovel {
 				+ configuracao + "]";
 	}
 
-	public void setLongitude(long longitude) {
+	public void setLongitude(float longitude) {
 		this.longitude = longitude;
 	}
 	
@@ -53,6 +53,6 @@ public abstract class UnidadeMovel {
 		this.configuracao = configuracao;
 	}
 
-	public abstract long distanciaEntreOrigemEDestino();
+	public abstract float distanciaEntreOrigemEDestino(float latitudeDestino, float longitudeDestino);
 
 }
