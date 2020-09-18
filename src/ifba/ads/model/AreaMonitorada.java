@@ -27,12 +27,12 @@ public class AreaMonitorada implements ComandarMonitoramento {
 
 				UnidadeMovel atual = it.next();
 
-				String conf = (atual.getConfiguracao().equipamentos.toString());
+				String configuracoesDaUnidade = (atual.getConfiguracao().equipamentos.toString());
 
-				conf = conf.replace("[", "");
-				conf = conf.replace("]", "");
+				configuracoesDaUnidade = configuracoesDaUnidade.replace("[", "");
+				configuracoesDaUnidade = configuracoesDaUnidade.replace("]", "");
 
-				if (conf.contains(equipamentosMinimosParaMonitoramento)) {
+				if (configuracoesDaUnidade.contains(equipamentosMinimosParaMonitoramento)) {
 					unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.add(atual);
 				}
 
