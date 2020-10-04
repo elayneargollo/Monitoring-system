@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>monitoring-system</groupId>
 	<artifactId>monitoring-system</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -20,12 +20,11 @@
 	</build>
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.200</version>
-			<scope>test</scope>
+			<scope>runtime</scope>
+			<version>1.4.193</version>
 		</dependency>
 
 	</dependencies>
