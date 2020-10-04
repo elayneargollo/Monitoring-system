@@ -8,10 +8,11 @@ public class UnidadeManhattan extends UnidadeMovel{
 
 	@Override
 	public float distanciaEntreOrigemEDestino(float latitudeDestino, float longitudeDestino) {
-		long obterValorQuadradoLatitude = (long) Math.pow((latitudeDestino - this.getLatitude()),2);
-		long obterValorQuadradoLongitude = (long) Math.pow((latitudeDestino - this.getLongitude()),2);
 		
-		return obterValorQuadradoLatitude - obterValorQuadradoLongitude;
+		float distancia;
+		distancia = (float) (Math.pow((latitudeDestino - this.getLatitude()),2) - (long) Math.pow((latitudeDestino - this.getLongitude()),2));
+			
+		return distancia;
 	}
 
 

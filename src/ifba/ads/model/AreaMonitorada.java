@@ -10,7 +10,7 @@ public class AreaMonitorada implements ComandarMonitoramento {
 
 	public void requisitoMinimo(boolean cameraDeVideo, boolean termometro, boolean MedidordeCo2,
 			boolean medidorDeMetano) {
-
+			
 		String equipamentosMinimosParaMonitoramento = equipamentosMinimos(cameraDeVideo, termometro, MedidordeCo2, medidorDeMetano)
 				.toString();
 
@@ -18,7 +18,7 @@ public class AreaMonitorada implements ComandarMonitoramento {
 		equipamentosMinimosParaMonitoramento = equipamentosMinimosParaMonitoramento.replace("]", "");
 
 	
-		if (equipamentosMinimosParaMonitoramento.equals("")) { // se ele n exigir, qlqr unidade serve =)
+		if (equipamentosMinimosParaMonitoramento.equals("")) { 
 			unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento = unidades;
 		} else {
 
@@ -47,6 +47,7 @@ public class AreaMonitorada implements ComandarMonitoramento {
 		}
 
 	}
+	
 
 	@Override
 	public String monitorar(float latitude, float longitude, boolean cameraDeVideo, boolean termometro,

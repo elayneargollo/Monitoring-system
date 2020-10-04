@@ -20,7 +20,7 @@ public class AppTeste {
 		/* Instanciando unidades moveis */
 
 		UnidadeMovel unidade = new UnidadeEuclidiana("teste", 4, 2, configuracao);
-		UnidadeMovel unidade3 = new UnidadeEuclidiana("teste3", 4, 2, configuracao3);
+		UnidadeMovel unidade3 = new UnidadeEuclidiana("teste3", 3, 2, configuracao);
 		UnidadeMovel unidadeM = new UnidadeManhattan("teste2", 42, 24, configuracao2);
 
 		/* Instanciando uma area que sera monitorada */
@@ -29,13 +29,13 @@ public class AppTeste {
 
 		/* Insiro na area monitora minhas unidades moveis disponiveis */
 
-		areaMonitorada.inserirUnidades(unidade);
+		areaMonitorada.inserirUnidades(unidadeM);
 		areaMonitorada.inserirUnidades(unidadeM);
 		areaMonitorada.inserirUnidades(unidade3);
 
 		/* Monitoro a área */
 
-		System.out.println(areaMonitorada.monitorar(7, 5, true, false, false, false));
+		System.out.println(areaMonitorada.monitorar(7, 5, true, false, true, false));
 
 	}
 
