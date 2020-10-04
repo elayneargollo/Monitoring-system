@@ -75,7 +75,7 @@ public class AreaMonitorada implements ComandarMonitoramento {
 	}
 
 	public ArrayList<EquipamentoEnum> equipamentosMinimos(boolean cameraDeVideo, boolean termometro,
-			boolean MedidordeCo2, boolean MedidordeMetano) {
+														  boolean MedidordeCo2, boolean MedidordeMetano) {
 
 		ArrayList<EquipamentoEnum> equipamentosMinimos = new ArrayList<>();
 
@@ -116,7 +116,7 @@ public class AreaMonitorada implements ComandarMonitoramento {
 		if(encontrado == false) {
 			unidades.add(unidade);
 		} else System.out.println("Não é possivel inserir a unidade: esta unidade já existe !");
-		
+	
 	}
 
 }

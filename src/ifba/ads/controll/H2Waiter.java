@@ -14,8 +14,7 @@ public class H2Waiter implements H2CRUD {
 
 	public H2Waiter() throws SQLException {
 		this.conexao = new H2Connection().getConnection();
-
-		//String criacaoDeTabela = criarTabela();
+		// String criacaoDeTabela = criarTabela();
 	}
 
 	public String criarTabela() {
@@ -30,7 +29,7 @@ public class H2Waiter implements H2CRUD {
 			stmt.executeUpdate(sql);
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 		return "Tabela criada !";
@@ -51,7 +50,7 @@ public class H2Waiter implements H2CRUD {
 			stmt.setString(4, unidade.getConfiguracao().toString());
 
 			stmt.execute();
-
+			stmt.close();
 
 		} catch (SQLException e) {
 			System.out.println("Nao e possivel inserir : chave primaria violada ! ");
@@ -61,12 +60,43 @@ public class H2Waiter implements H2CRUD {
 	}
 
 	@Override
-	public void atualizar() {
+	public void atualizar(UnidadeMovel unidade) {
 
+		String sql = "update UNIDADEMOVEL set  latitude=?, longitude=?, configuracao=? where id=?";
+
+		PreparedStatement stmt;
+
+		try {
+			stmt = conexao.prepareStatement(sql);
+			stmt.setFloat(1, unidade.getLatitude());
+			stmt.setFloat(2, unidade.getLongitude());
+			stmt.setString(3, unidade.getConfiguracao().toString());
+			stmt.setString(4, unidade.getId());
+
+			stmt.execute();
+			stmt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
-	public void deletar() {
+	public void deletar(UnidadeMovel unidade) {
+
+		String sql = "delete from UNIDADEMOVEL where id=? ";
+
+		PreparedStatement stmt;
+		try {
+			stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, unidade.getId());
+
+			stmt.execute();
+			stmt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 
 	}
 
@@ -75,24 +105,22 @@ public class H2Waiter implements H2CRUD {
 
 		String sql = " select * from UNIDADEMOVEL";
 		Statement stmt;
-		
+
 		try {
-			
+
 			stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 
 			System.out.println("Unidades encontradas: ");
-			
+
 			while (rs.next()) {
-				System.out.println("\t"
-									+ rs.getString(1) 
-									+ " " + rs.getFloat(2) 
-									+ " " + rs.getFloat(3) 
-									+ " " + rs.getString(4));
+				System.out.println("\tid: " + rs.getString(1) + "\tLatitude: " 
+									+ rs.getFloat(2) + "\tLongitude: " 
+									+ rs.getFloat(3) + "\tConfiguracao " 
+									+ rs.getString(4));
 			}
 		} catch (SQLException e) {
-
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 	}

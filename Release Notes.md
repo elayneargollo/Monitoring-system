@@ -1,5 +1,11 @@
 # Release Notes
 
+## 0.1.2
++ Atualiza unidade do dados nos banco
+
+## 0.1.1
++ Deleta unidade do dados nos banco
+
 ## 0.1.0
 + Insere dados nos banco
 

@@ -7,6 +7,8 @@ import ifba.ads.controll.H2Waiter;
 public class AppTeste {
 
 	public static void main(String[] args) throws SQLException {
+		
+		/* Configuracao da camada de negocio */
 
 		ConfiguracaoDaUnidade configuracao = new ConfiguracaoDaUnidade();
 		ConfiguracaoDaUnidade configuracao2 = new ConfiguracaoDaUnidade();
@@ -22,16 +24,28 @@ public class AppTeste {
 		UnidadeMovel unidadeM = new UnidadeManhattan("teste2", 42, 24, configuracao2);
 
 		AreaMonitorada areaMonitorada = new AreaMonitorada();
-
-		areaMonitorada.inserirUnidades(unidadeM);
+		
 		areaMonitorada.inserirUnidades(unidadeM);
 		areaMonitorada.inserirUnidades(unidade3);
 		
-	//	H2Waiter h2 = new H2Waiter();
-	//	h2.inserir(unidadeM);
-	//	h2.consultar();
-
-	//	System.out.println(areaMonitorada.monitorar(7, 5, true, false, true, false));
+		System.out.println("=> "+areaMonitorada.monitorar(7, 5, true, false, true, false));
+		
+		/* Testes da camada de controll */
+		
+		H2Waiter service = new H2Waiter();
+	
+		System.out.println("\nCondicao inicial do banco =>");
+		service.inserir(unidadeM);
+		service.consultar();	
+		
+		System.out.println("\nCondicao apos atualizar unidade =>");
+		unidadeM.setLatitude(15);
+		service.atualizar(unidadeM);
+		service.consultar();
+		
+		System.out.println("\nCondicao apos deletar unidade =>");
+		service.deletar(unidadeM);
+		service.consultar();
 
 	}
 
