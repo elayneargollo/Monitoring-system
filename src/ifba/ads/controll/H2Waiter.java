@@ -15,7 +15,6 @@ public class H2Waiter implements H2CRUD {
 
 	public H2Waiter() throws SQLException {
 		conexao = DriverManager.getConnection("jdbc:h2:" + "./database/unidadeMovel", "sa", "");
-		// String criacaoDeTabela = criarTabela();
 	}
 
 	public String criarTabela() {
