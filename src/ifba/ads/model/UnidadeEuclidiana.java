@@ -9,10 +9,13 @@ public class UnidadeEuclidiana extends UnidadeMovel{
 
 	@Override
 	public float distanciaEntreOrigemEDestino(float latitudeDestino, float longitudeDestino) {
-		long obterValorQuadradoLatitude = (long) Math.pow((latitudeDestino - this.getLatitude()),2);
-		long obterValorQuadradoLongitude = (long) Math.pow((longitudeDestino - this.getLongitude()),2);
+	
+
+		float distancia;
+		distancia = (float) Math.sqrt(Math.pow((latitudeDestino - this.getLatitude()),2) + Math.pow((longitudeDestino - this.getLongitude()),2));
+
 		
-		return (float) Math.sqrt(obterValorQuadradoLatitude + obterValorQuadradoLongitude);
+		return distancia;
 	
 	}
 
