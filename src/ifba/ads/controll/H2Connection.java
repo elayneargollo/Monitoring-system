@@ -7,11 +7,8 @@ import java.sql.SQLException;
 public class H2Connection {
 
 	public Connection getConnection() throws SQLException {
-
-		System.out.println("Conectando ao banco de dados");
-
-		Connection conn = DriverManager.getConnection("jdbc:h2:~/test\"", "root", "password");
+		Connection conn = DriverManager.getConnection("jdbc:h2:" + "./database/unidadeMovel", "sa", "");
 		return conn;
 	}
-
+	
 }

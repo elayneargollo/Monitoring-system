@@ -52,6 +52,10 @@ public abstract class UnidadeMovel {
 	public void setConfiguracao(ConfiguracaoDaUnidade configuracao) {
 		this.configuracao = configuracao;
 	}
+	
+	public boolean equals (UnidadeMovel unidade) {
+		return this.getId().equals(unidade.getId());
+	}
 
 	public abstract float distanciaEntreOrigemEDestino(float latitudeDestino, float longitudeDestino);
 

@@ -104,7 +104,19 @@ public class AreaMonitorada implements ComandarMonitoramento {
 
 	@Override
 	public void inserirUnidades(UnidadeMovel unidade) {
-		unidades.add(unidade);
+		
+		boolean encontrado = false;
+		
+		for (int i=0; i<unidades.size(); i++) {
+			if(unidades.get(i).equals(unidade)) {
+				encontrado = true;
+			}
+		}
+		
+		if(encontrado == false) {
+			unidades.add(unidade);
+		} else System.out.println("Não é possivel inserir a unidade: esta unidade já existe !");
+		
 	}
 
 }
