@@ -1,6 +1,7 @@
 package ifba.ads.controll;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,21 +14,18 @@ public class H2Waiter implements H2CRUD {
 	private Connection conexao;
 
 	public H2Waiter() throws SQLException {
-		this.conexao = new H2Connection().getConnection();
+		conexao = DriverManager.getConnection("jdbc:h2:" + "./database/unidadeMovel", "sa", "");
 		// String criacaoDeTabela = criarTabela();
 	}
 
 	public String criarTabela() {
-
 		String sql = "CREATE TABLE UNIDADEMOVEL" + "(id VARCHAR(255)," + " latitude DOUBLE, " + " longitude DOUBLE, "
 				+ " configuracao VARCHAR(255), " + " PRIMARY KEY (id))";
-
 		Statement stmt;
 
 		try {
 			stmt = conexao.createStatement();
 			stmt.executeUpdate(sql);
-
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -38,17 +36,15 @@ public class H2Waiter implements H2CRUD {
 
 	@Override
 	public void inserir(UnidadeMovel unidade) {
-
 		String sql = "INSERT INTO UNIDADEMOVEL(id, latitude, longitude, configuracao) VALUES (?,?,?,?)";
-
 		PreparedStatement stmt;
+		
 		try {
 			stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, unidade.getId());
 			stmt.setFloat(2, unidade.getLatitude());
 			stmt.setFloat(3, unidade.getLongitude());
 			stmt.setString(4, unidade.getConfiguracao().toString());
-
 			stmt.execute();
 			stmt.close();
 
@@ -61,9 +57,7 @@ public class H2Waiter implements H2CRUD {
 
 	@Override
 	public void atualizar(UnidadeMovel unidade) {
-
 		String sql = "update UNIDADEMOVEL set  latitude=?, longitude=?, configuracao=? where id=?";
-
 		PreparedStatement stmt;
 
 		try {
@@ -72,7 +66,6 @@ public class H2Waiter implements H2CRUD {
 			stmt.setFloat(2, unidade.getLongitude());
 			stmt.setString(3, unidade.getConfiguracao().toString());
 			stmt.setString(4, unidade.getId());
-
 			stmt.execute();
 			stmt.close();
 
@@ -83,14 +76,12 @@ public class H2Waiter implements H2CRUD {
 
 	@Override
 	public void deletar(UnidadeMovel unidade) {
-
 		String sql = "delete from UNIDADEMOVEL where id=? ";
-
 		PreparedStatement stmt;
+		
 		try {
 			stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, unidade.getId());
-
 			stmt.execute();
 			stmt.close();
 
@@ -102,23 +93,18 @@ public class H2Waiter implements H2CRUD {
 
 	@Override
 	public void consultar() {
-
 		String sql = " select * from UNIDADEMOVEL";
 		Statement stmt;
 
 		try {
-
 			stmt = conexao.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 
-			System.out.println("Unidades encontradas: ");
-
 			while (rs.next()) {
-				System.out.println("\tid: " + rs.getString(1) + "\tLatitude: " 
-									+ rs.getFloat(2) + "\tLongitude: " 
-									+ rs.getFloat(3) + "\tConfiguracao " 
-									+ rs.getString(4));
+				System.out.println("\tid: " + rs.getString(1) + "\tLatitude: " + rs.getFloat(2) + "\tLongitude: "
+						+ rs.getFloat(3) + "\tConfiguracao " + rs.getString(4));
 			}
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

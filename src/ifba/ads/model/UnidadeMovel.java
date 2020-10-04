@@ -37,8 +37,7 @@ public abstract class UnidadeMovel {
 
 	@Override
 	public String toString() {
-		return "UnidadeMovel [id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + ", configuracao="
-				+ configuracao + "]";
+		return "UnidadeMovel [id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + ", configuracao=" + configuracao + "]";
 	}
 
 	public void setLongitude(float longitude) {

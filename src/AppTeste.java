@@ -32,7 +32,7 @@ public class AppTeste {
 		areaMonitorada.inserirUnidades(unidadeM);
 		areaMonitorada.inserirUnidades(unidade3);
 		
-		System.out.println("=> "+areaMonitorada.monitorar(7, 5, true, false, true, false));
+	//	System.out.println("=> "+areaMonitorada.monitorar(7, 5, true, false, true, false));
 		
 		/* Testes da camada de controll */
 		
@@ -43,7 +43,7 @@ public class AppTeste {
 		service.consultar();	
 		
 		System.out.println("\nCondicao apos atualizar unidade =>");
-		unidadeM.setLatitude(5);
+		unidadeM.setLatitude(15);
 		service.atualizar(unidadeM);
 		service.consultar();
 		
