@@ -18,9 +18,14 @@ public class H2Waiter implements H2CRUD {
 	}
 
 	public String criarTabela() {
-		String sql = "CREATE TABLE UNIDADEMOVEL" + "(id VARCHAR(255)," + " latitude DOUBLE, " + " longitude DOUBLE, "
-				+ " configuracao VARCHAR(255), " + " PRIMARY KEY (id))";
 		Statement stmt;
+		String sql = "CREATE TABLE UNIDADEMOVEL" 
+					  + "(id VARCHAR(255)," 
+					  + " latitude DOUBLE, " 
+					  + " longitude DOUBLE, "
+					  + " configuracao VARCHAR(255), "
+					  + " PRIMARY KEY (id))";
+		
 
 		try {
 			stmt = conexao.createStatement();
@@ -100,8 +105,14 @@ public class H2Waiter implements H2CRUD {
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				System.out.println("\tid: " + rs.getString(1) + "\tLatitude: " + rs.getFloat(2) + "\tLongitude: "
-						+ rs.getFloat(3) + "\t" + rs.getString(4));
+				
+				System.out.println("\tid: " + rs.getString(1) 
+											+ "\tLatitude: " 
+											+ rs.getFloat(2) 
+											+ "\tLongitude: "
+											+ rs.getFloat(3) 
+											+ "\t" 
+											+ rs.getString(4));
 			}
 			
 		} catch (SQLException e) {
