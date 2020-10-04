@@ -106,13 +106,14 @@ public class H2Waiter implements H2CRUD {
 
 			while (rs.next()) {
 				
-				System.out.println("\tid: " + rs.getString(1) 
-											+ "\tLatitude: " 
-											+ rs.getFloat(2) 
-											+ "\tLongitude: "
-											+ rs.getFloat(3) 
-											+ "\t" 
-											+ rs.getString(4));
+				System.out.println("\tid: " 
+									+ rs.getString(1) 
+									+ "\tLatitude: " 
+									+ rs.getFloat(2) 
+									+ "\tLongitude: "
+									+ rs.getFloat(3) 
+									+ "\t" 
+									+ rs.getString(4));
 			}
 			
 		} catch (SQLException e) {
