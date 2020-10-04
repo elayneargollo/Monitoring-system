@@ -1,5 +1,8 @@
 # Release Notes
 
+## 0.0.4
++ Implementação de estrutura do banco de dados
+
 ## 0.0.3
 + Implementação da área monitorada
 
