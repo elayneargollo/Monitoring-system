@@ -13,17 +13,17 @@ public class Monitorar extends H2Waiter  {
 	public String monitorar(float latitude, float longitude, boolean cameraDeVideo, boolean termometro,
 			boolean MedidordeCo2, boolean medidorDeMetano) {
 
-		String equipamentosMinimosParaMonitoramento = equipamentosMinimos(cameraDeVideo, termometro, MedidordeCo2,
-				medidorDeMetano).toString();
-
-		procuraUnidadeComRequisitoMinimo(equipamentosMinimosParaMonitoramento);
+		procuraUnidadeComRequisitoMinimo(cameraDeVideo,termometro, MedidordeCo2, medidorDeMetano);
 
 		UnidadeMovel unidade = (getMenorDistancia(latitude, longitude));
-		atualizar(getMenorDistancia(latitude, longitude));
-		return unidade.getId().toString() + " irá se deslocar";
+		atualizar(unidade);
+		return "Unidade " + unidade.getId().toString() + " irá se deslocar";
 	}
 
-	public void procuraUnidadeComRequisitoMinimo(String equipamentosMinimosParaMonitoramento) {
+	public void procuraUnidadeComRequisitoMinimo(boolean cameraDeVideo, boolean termometro,boolean MedidordeCo2, boolean medidorDeMetano) {
+
+		String equipamentosMinimosParaMonitoramento = equipamentosMinimos(cameraDeVideo, termometro, MedidordeCo2,
+				medidorDeMetano).toString();
 
 		equipamentosMinimosParaMonitoramento = equipamentosMinimosParaMonitoramento.replace("[", "");
 		equipamentosMinimosParaMonitoramento = equipamentosMinimosParaMonitoramento.replace("]", "");
@@ -100,7 +100,6 @@ public class Monitorar extends H2Waiter  {
 
 		unidadeQueIraSeDeslocar.setLocalizacao(longitude, latitude);
 		return unidadeQueIraSeDeslocar;
-		//return "Unidade com identificador " + unidadeQueIraSeDeslocar.getId() + " transladada para o local solicitado";
 	}
 
 	public void inserirUnidades(UnidadeMovel unidade) {
