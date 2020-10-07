@@ -11,9 +11,9 @@ public class Monitorar extends H2Waiter  {
 	public ArrayList<UnidadeMovel> unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento = new ArrayList<>();
 
 	public String monitorar(float latitude, float longitude, boolean cameraDeVideo, boolean termometro,
-			boolean MedidordeCo2, boolean medidorDeMetano) {
+			boolean medidordeCo2, boolean medidorDeMetano) {
 
-		procuraUnidadeComRequisitoMinimo(cameraDeVideo,termometro, MedidordeCo2, medidorDeMetano);
+		procuraUnidadeComRequisitoMinimo(cameraDeVideo,termometro, medidordeCo2, medidorDeMetano);
 
 		UnidadeMovel unidade = (getMenorDistancia(latitude, longitude));
 		atualizar(unidade);

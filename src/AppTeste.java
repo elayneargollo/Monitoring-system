@@ -20,7 +20,9 @@ public class AppTeste {
 
 		configuracao.adicionarEquipamentosAUnidade(EquipamentoEnum.CAMERADEVIDEO);
 		configuracao.adicionarEquipamentosAUnidade(EquipamentoEnum.MEDIDORDEC02);
+		
 		configuracao2.adicionarEquipamentosAUnidade(EquipamentoEnum.MEDIDORDEC02);
+		
 		configuracao3.adicionarEquipamentosAUnidade(EquipamentoEnum.CAMERADEVIDEO);
 
 		UnidadeMovel unidade = new UnidadeEuclidiana("teste", 3, 2, configuracao);
