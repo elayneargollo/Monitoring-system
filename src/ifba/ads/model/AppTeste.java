@@ -23,29 +23,12 @@ public class AppTeste {
 		UnidadeMovel unidade3 = new UnidadeEuclidiana("teste3", 3, 2, configuracao);
 		UnidadeMovel unidadeM = new UnidadeManhattan("teste2", 42, 24, configuracao2);
 
-		AreaMonitorada areaMonitorada = new AreaMonitorada();
-		
+		Monitorar areaMonitorada = new Monitorar();
 		areaMonitorada.inserirUnidades(unidadeM);
 		areaMonitorada.inserirUnidades(unidade3);
+		areaMonitorada.inserirUnidades(unidade);
 		
 		System.out.println("=> "+areaMonitorada.monitorar(7, 5, true, false, true, false));
-		
-		/* Testes da camada de controll */
-		
-		H2Waiter service = new H2Waiter();
-	
-		System.out.println("\nCondicao inicial do banco =>");
-		service.inserir(unidadeM);
-		service.consultar();	
-		
-		System.out.println("\nCondicao apos atualizar unidade =>");
-		unidadeM.setLatitude(15);
-		service.atualizar(unidadeM);
-		service.consultar();
-		
-		System.out.println("\nCondicao apos deletar unidade =>");
-		service.deletar(unidadeM);
-		service.consultar();
 
 	}
 

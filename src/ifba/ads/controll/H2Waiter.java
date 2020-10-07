@@ -13,8 +13,14 @@ public class H2Waiter implements H2CRUD {
 
 	private Connection conexao;
 
-	public H2Waiter() throws SQLException {
-		conexao = DriverManager.getConnection("jdbc:h2:" + "./database/unidadeMovel", "sa", "");
+	public H2Waiter() {
+		try {
+			conexao = DriverManager.getConnection("jdbc:h2:" + "./database/unidadeMovel", "sa", "");
+			criarTabela();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String criarTabela() {

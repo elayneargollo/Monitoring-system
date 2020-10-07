@@ -1,5 +1,8 @@
 # Release Notes
 
+## 0.1.3
++ Integração da classe de negocio com o banco
+
 ## 0.1.2
 + Atualiza unidade do dados nos banco
 

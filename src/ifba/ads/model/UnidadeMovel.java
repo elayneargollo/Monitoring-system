@@ -19,6 +19,11 @@ public abstract class UnidadeMovel {
 		return id;
 	}
 
+	public void setLocalizacao(float longitude, float latitude) {
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
