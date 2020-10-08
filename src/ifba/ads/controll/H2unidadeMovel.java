@@ -158,32 +158,7 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 
 	}
 
-	@Override
-	public void buscarPorTodasAsUnidades() {
-		Statement stmt;
-
-		try {
-			stmt = conexao.createStatement();
-			ResultSet rs = stmt.executeQuery(CONSULTAR);
-
-			while (rs.next()) {
-				
-				System.out.println("\tid: " 
-									+ rs.getString(1) 
-									+ "\tLatitude: " 
-									+ rs.getFloat(2) 
-									+ "\tLongitude: "
-									+ rs.getFloat(3) 
-									+ "\tEquipamentos: " 
-									+ rs.getString(4));
-			}
-			
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-
-	}
-	
+		
 	public ArrayList<UnidadeMovel> buscarUnidadesH2() {
 		Statement stmt;
 		
