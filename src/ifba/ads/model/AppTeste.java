@@ -25,7 +25,7 @@ public class AppTeste {
 
 		Monitorar areaMonitorada = new Monitorar();
 
-		System.out.println("=> "+areaMonitorada.monitorar(7, 5, true, false, true, false));
+		System.out.println("=> "+areaMonitorada.unidadeMovelMaisProxima(7, 5, true, false, true, false));
 
 	}
 

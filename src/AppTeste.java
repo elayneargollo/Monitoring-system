@@ -11,8 +11,6 @@ import ifba.ads.model.UnidadeMovel;
 public class AppTeste {
 
 	public static void main(String[] args) throws SQLException {
-		
-		/* Configuracao da camada de negocio */
 
 		ConfiguracaoDaUnidade configuracao = new ConfiguracaoDaUnidade();
 		ConfiguracaoDaUnidade configuracao2 = new ConfiguracaoDaUnidade();
@@ -29,19 +27,12 @@ public class AppTeste {
 		UnidadeMovel unidadeA = new UnidadeManhattan("teste24", 8, 5, configuracao2);
 		
 		Monitorar areaMonitorada = new Monitorar();
-		//areaMonitorada.inserirUnidades(unidade);
-	//	areaMonitorada.inserirUnidades(unidadeM);
-	//	areaMonitorada.inserirUnidades(unidade3); 
-		
-	//	System.out.println(unidade.getConfiguracao().getEquipamentos());
-		
-		//areaMonitorada.addUnidade(unidadeM);
-		//areaMonitorada.addUnidade(unidadeA);
-		//areaMonitorada.addUnidade(unidade);
-//		areaMonitorada.consultar();
-	
 
-		System.out.println("=> "+areaMonitorada.monitorar(7, 5, true, false, true, false));	
+//		areaMonitorada.addUnidade(unidadeM);
+//		areaMonitorada.addUnidade(unidadeA);
+//		areaMonitorada.addUnidade(unidade);
+
+		System.out.println("=> "+areaMonitorada.unidadeMovelMaisProxima(7, 5, true, false, true, false));	
 
 	}
 

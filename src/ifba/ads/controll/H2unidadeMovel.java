@@ -19,6 +19,15 @@ import ifba.ads.model.UnidadeMovel;
 public class H2unidadeMovel implements UnidadeMovelDAO {
 
 	private Connection conexao;
+	
+	private static final String DRIVE_CONEXAO = "jdbc:h2:";
+	private static final String DATA_BASE = "unidadeMovel";
+	private static final String SOURCE = "./database/";
+	private static final String URI = DRIVE_CONEXAO + SOURCE + DATA_BASE;
+	
+	private static final String USUARIO = "sa";
+	private static final String SENHA = "";
+	
 	private static final int UNIDADE_EUCLIDIANA = 0;
 	private static final int UNIDADE_MANHATTAN = 1;	
 	
@@ -42,7 +51,7 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 
 	public H2unidadeMovel() {
 		try {
-			conexao = DriverManager.getConnection("jdbc:h2:" + "./database/unidadeMovel", "sa", "");
+			conexao = DriverManager.getConnection(URI, USUARIO, SENHA);
 		//	criarTabela();
 		} catch (SQLException e) {
 			e.printStackTrace();
