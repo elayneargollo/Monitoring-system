@@ -3,9 +3,9 @@ package ifba.ads.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ifba.ads.controll.H2Waiter;
+import ifba.ads.controll.H2UNIDADEMOVEL;
 
-public class Monitorar extends H2Waiter  {
+public class Monitorar extends H2UNIDADEMOVEL  {
 
 	public ArrayList<UnidadeMovel> unidades = new ArrayList<>();;
 	public ArrayList<UnidadeMovel> unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento = new ArrayList<>();
@@ -17,6 +17,7 @@ public class Monitorar extends H2Waiter  {
 
 		UnidadeMovel unidade = (getMenorDistancia(latitude, longitude));
 		atualizar(unidade);
+		consultar();
 		return "Unidade " + unidade.getId().toString() + " irá se deslocar";
 	}
 

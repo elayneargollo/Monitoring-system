@@ -2,7 +2,7 @@ package ifba.ads.controll;
 
 import ifba.ads.model.UnidadeMovel;
 
-public interface H2CRUD {
+public interface UnidadeMovelDAO {
 	
 	abstract void inserir(UnidadeMovel unidade);
 	abstract void atualizar(UnidadeMovel unidade);

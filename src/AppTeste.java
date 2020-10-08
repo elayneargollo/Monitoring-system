@@ -1,6 +1,6 @@
 import java.sql.SQLException;
 
-import ifba.ads.controll.H2Waiter;
+import ifba.ads.controll.H2UNIDADEMOVEL;
 import ifba.ads.model.ConfiguracaoDaUnidade;
 import ifba.ads.model.EquipamentoEnum;
 import ifba.ads.model.Monitorar;
@@ -30,8 +30,9 @@ public class AppTeste {
 		UnidadeMovel unidadeM = new UnidadeManhattan("teste2", 42, 24, configuracao2);
 		
 		Monitorar areaMonitorada = new Monitorar();
+		areaMonitorada.inserirUnidades(unidade);
 		areaMonitorada.inserirUnidades(unidadeM);
-	//	areaMonitorada.inserirUnidades(unidade3);
+		areaMonitorada.inserirUnidades(unidade3);
 
 		System.out.println("=> "+areaMonitorada.monitorar(7, 5, true, false, true, false));	
 

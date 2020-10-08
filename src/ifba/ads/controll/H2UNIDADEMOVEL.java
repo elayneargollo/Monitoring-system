@@ -11,31 +11,33 @@ import ifba.ads.model.UnidadeEuclidiana;
 import ifba.ads.model.UnidadeManhattan;
 import ifba.ads.model.UnidadeMovel;
 
-public class H2Waiter implements H2CRUD {
+public class H2UNIDADEMOVEL implements UnidadeMovelDAO {
 
 	private Connection conexao;
-	private static int tipoDaUnidade = 0;
+	private static int tipoUnidade = 0;
 	
-	private final String INSERT = "INSERT INTO UNIDADEMOVEL(id, latitude, longitude, configuracao) "
-									+ "VALUES (?,?,?,?)";
+	private final String INSERT = "INSERT INTO UNIDADE"
+									+ "(id, latitude, longitude, configuracao, tipoDaUnidade)"
+									+ "VALUES (?,?,?,?,?)";
 	
-	private final String CREATE = "CREATE TABLE UNIDADEMOVEL" 
+	private final String CREATE = "CREATE TABLE UNIDADE" 
 								  + "(id VARCHAR(255)," 
 								  + " latitude DOUBLE, " 
 								  + " longitude DOUBLE, "
 								  + " configuracao VARCHAR(255), "
+								  + " tipoDaUnidade INT, "
 								  + " PRIMARY KEY (id))";
 
-	private final String ATUALIZAR  = "update UNIDADEMOVEL "
+	private final String ATUALIZAR  = "update UNIDADE "
 									+ "set  latitude=?, longitude=?, configuracao=? "
 									+ "where id=?";
 	
-	private final String CONSULTAR = " select * from UNIDADEMOVEL";
+	private final String CONSULTAR = " select * from UNIDADE";
 
-	public H2Waiter() {
+	public H2UNIDADEMOVEL() {
 		try {
-			conexao = DriverManager.getConnection("jdbc:h2:" + "./database/unidadeMovel", "sa", "");
-			//criarTabela();
+			conexao = DriverManager.getConnection("jdbc:h2:" + "./database/unidade", "sa", "");
+			criarTabela();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -58,8 +60,6 @@ public class H2Waiter implements H2CRUD {
 	@Override
 	public void inserir(UnidadeMovel unidade) {
 
-		System.out.println(unidade instanceof UnidadeEuclidiana);
-	
 		if (unidade instanceof UnidadeEuclidiana) {
 			inserirEuclidiana(unidade);
 		} else if (unidade instanceof UnidadeManhattan) {
@@ -78,12 +78,12 @@ public class H2Waiter implements H2CRUD {
 			stmt.setFloat(2, unidade.getLatitude());
 			stmt.setFloat(3, unidade.getLongitude());
 			stmt.setString(4, unidade.getConfiguracao().toString());
-			stmt.setInt(5, H2Waiter.tipoDaUnidade);
+			stmt.setInt(5, H2UNIDADEMOVEL.tipoUnidade);
 			stmt.execute();
 			stmt.close();
 
 		} catch (SQLException e) {
-			System.out.println("Nao e possivel inserir : chave primaria violada ! ");
+			System.out.println(e);
 			System.exit(0);
 		}
 	}
@@ -91,7 +91,6 @@ public class H2Waiter implements H2CRUD {
 	public void inserirEuclidiana (UnidadeMovel unidade) {
 	
 		PreparedStatement stmt;
-		tipoDaUnidade = 1;
 
 		try {
 			stmt = conexao.prepareStatement(INSERT);
@@ -99,7 +98,7 @@ public class H2Waiter implements H2CRUD {
 			stmt.setFloat(2, unidade.getLatitude());
 			stmt.setFloat(3, unidade.getLongitude());
 			stmt.setString(4, unidade.getConfiguracao().toString());
-			stmt.setInt(5, H2Waiter.tipoDaUnidade);
+			stmt.setInt(5,  H2UNIDADEMOVEL.tipoUnidade);
 			stmt.execute();
 			stmt.close();
 
