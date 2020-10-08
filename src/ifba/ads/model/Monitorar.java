@@ -9,12 +9,12 @@ import ifba.ads.controll.UnidadeMovelDAO;
 public class Monitorar extends H2unidadeMovel  {
 
 	UnidadeMovelDAO unidadeMovelDAO;
-	
 	public ArrayList<UnidadeMovel> unidades;
 	public ArrayList<UnidadeMovel> unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento = new ArrayList<>();
 	
 	public Monitorar() {
     	this.unidadeMovelDAO = new H2unidadeMovel();
+ 		this.unidades = buscarUnidadesH2();
     }    
 	
 	public void addUnidade (UnidadeMovel unidade) {
@@ -24,13 +24,10 @@ public class Monitorar extends H2unidadeMovel  {
  	public String monitorar(float latitude, float longitude, boolean cameraDeVideo, boolean termometro,
 			boolean medidordeCo2, boolean medidorDeMetano) {
 
- 		unidades = this.getUnidades();
+ 		this.procuraUnidadeComRequisitoMinimo(cameraDeVideo,termometro, medidordeCo2, medidorDeMetano);
+		this.atualizar(buscarUnidadeComMenorDistancia(latitude, longitude));
 		
- 		procuraUnidadeComRequisitoMinimo(cameraDeVideo,termometro, medidordeCo2, medidorDeMetano);
-
-		UnidadeMovel unidadeProxima = (getMenorDistancia(latitude, longitude));
-		atualizar(unidadeProxima);
-		return "Unidade " + unidadeProxima.getId().toString() + " irá se deslocar";
+		return "Unidade " + buscarUnidadeComMenorDistancia(latitude, longitude).getId() + " irá se deslocar";
 	}
 
 	public void procuraUnidadeComRequisitoMinimo(boolean cameraDeVideo, boolean termometro,boolean MedidordeCo2, boolean medidorDeMetano) {
@@ -93,7 +90,7 @@ public class Monitorar extends H2unidadeMovel  {
 
 	}
 
-	public UnidadeMovel getMenorDistancia(float latitude, float longitude) {
+	public UnidadeMovel buscarUnidadeComMenorDistancia(float latitude, float longitude) {
 
 		float menorDistancia = unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.get(0)
 				.getDistancia(latitude, longitude);

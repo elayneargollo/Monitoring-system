@@ -24,10 +24,7 @@ public class AppTeste {
 		UnidadeMovel unidadeM = new UnidadeManhattan("teste2", 42, 24, configuracao2);
 
 		Monitorar areaMonitorada = new Monitorar();
-		areaMonitorada.inserirUnidades(unidadeM);
-		areaMonitorada.inserirUnidades(unidade3);
-		areaMonitorada.inserirUnidades(unidade);
-		
+
 		System.out.println("=> "+areaMonitorada.monitorar(7, 5, true, false, true, false));
 
 	}

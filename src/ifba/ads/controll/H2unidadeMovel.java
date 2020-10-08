@@ -19,7 +19,6 @@ import ifba.ads.model.UnidadeMovel;
 public class H2unidadeMovel implements UnidadeMovelDAO {
 
 	private Connection conexao;
-	
 	private static final int UNIDADE_EUCLIDIANA = 0;
 	private static final int UNIDADE_MANHATTAN = 1;	
 	
@@ -151,7 +150,7 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 	}
 
 	@Override
-	public void consultar() {
+	public void buscarPorTodasAsUnidades() {
 		Statement stmt;
 
 		try {
@@ -176,8 +175,7 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 
 	}
 	
-
-	public ArrayList<UnidadeMovel> getUnidades() {
+	public ArrayList<UnidadeMovel> buscarUnidadesH2() {
 		Statement stmt;
 		
 		ArrayList<UnidadeMovel> unidades = new ArrayList<>();
@@ -185,24 +183,24 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 
 		try {
 			stmt = conexao.createStatement();
-			ResultSet rs = stmt.executeQuery(CONSULTAR);
+			ResultSet result = stmt.executeQuery(CONSULTAR);
 
-			while (rs.next()) {
-				int tipo = rs.getInt("tipoDaUnidade");
-				ConfiguracaoDaUnidade conf =  gerarEnum(rs);
+			while (result.next()) {
+				int tipoDaUnidade = result.getInt("tipoDaUnidade");
+				ConfiguracaoDaUnidade configuracao =  gerarConfiguracaoEnum(result);
 				
-				if (tipo == 0) {
-					unidade = new UnidadeEuclidiana(rs.getString("id"), 
-							rs.getFloat("latitude"), 
-							rs.getFloat("longitude"), 
-							conf);
+				if (tipoDaUnidade == 0) {
+					unidade = new UnidadeEuclidiana(result.getString("id"), 
+							result.getFloat("latitude"), 
+							result.getFloat("longitude"), 
+							configuracao);
 				
 				} 
-				else if (tipo == 1) {
-					unidade = new UnidadeManhattan(rs.getString("id"), 
-													rs.getFloat("latitude"), 
-													rs.getFloat("longitude"), 
-													conf);
+				else if (tipoDaUnidade == 1) {
+					unidade = new UnidadeManhattan(result.getString("id"), 
+													result.getFloat("latitude"), 
+													result.getFloat("longitude"), 
+													configuracao);
 				}
 				unidades.add(unidade);
 			}
@@ -214,8 +212,7 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 
 	}
 
-	
-	public ConfiguracaoDaUnidade gerarEnum(ResultSet rs) throws SQLException {
+	public ConfiguracaoDaUnidade gerarConfiguracaoEnum(ResultSet rs) throws SQLException {
 		
 		String conf = rs.getString("configuracao");
 		conf = conf.replace("[", "");
