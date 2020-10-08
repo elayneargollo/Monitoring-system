@@ -31,7 +31,7 @@ public class AppTeste {
 		
 		Monitorar areaMonitorada = new Monitorar();
 		areaMonitorada.inserirUnidades(unidadeM);
-		areaMonitorada.inserirUnidades(unidade3);
+	//	areaMonitorada.inserirUnidades(unidade3);
 
 		System.out.println("=> "+areaMonitorada.monitorar(7, 5, true, false, true, false));	
 

@@ -1,0 +1,14 @@
+2020-10-08 11:58:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIDADEMOVEL" already exists; SQL statement:
+CREATE TABLE UNIDADEMOVEL(id VARCHAR(255), latitude DOUBLE,  longitude DOUBLE,  configuracao VARCHAR(255),  PRIMARY KEY (id)) [42101-193]
+2020-10-08 12:09:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Invalid value "5" for parameter "parameterIndex" [90008-193]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:228)
+	at org.h2.jdbc.JdbcPreparedStatement.setParameter(JdbcPreparedStatement.java:1418)
+	at org.h2.jdbc.JdbcPreparedStatement.setInt(JdbcPreparedStatement.java:335)
+	at ifba.ads.controll.H2Waiter.inserirManhattan(H2Waiter.java:79)
+	at ifba.ads.controll.H2Waiter.inserir(H2Waiter.java:62)
+	at ifba.ads.model.Monitorar.inserirUnidades(Monitorar.java:117)
+	at AppTeste.main(AppTeste.java:33)

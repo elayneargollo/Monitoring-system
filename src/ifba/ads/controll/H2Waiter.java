@@ -7,35 +7,46 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import ifba.ads.model.UnidadeEuclidiana;
+import ifba.ads.model.UnidadeManhattan;
 import ifba.ads.model.UnidadeMovel;
 
 public class H2Waiter implements H2CRUD {
 
 	private Connection conexao;
+	private static int tipoDaUnidade = 0;
+	
+	private final String INSERT = "INSERT INTO UNIDADEMOVEL(id, latitude, longitude, configuracao) "
+									+ "VALUES (?,?,?,?)";
+	
+	private final String CREATE = "CREATE TABLE UNIDADEMOVEL" 
+								  + "(id VARCHAR(255)," 
+								  + " latitude DOUBLE, " 
+								  + " longitude DOUBLE, "
+								  + " configuracao VARCHAR(255), "
+								  + " PRIMARY KEY (id))";
+
+	private final String ATUALIZAR  = "update UNIDADEMOVEL "
+									+ "set  latitude=?, longitude=?, configuracao=? "
+									+ "where id=?";
+	
+	private final String CONSULTAR = " select * from UNIDADEMOVEL";
 
 	public H2Waiter() {
 		try {
 			conexao = DriverManager.getConnection("jdbc:h2:" + "./database/unidadeMovel", "sa", "");
-			criarTabela();
+			//criarTabela();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	public String criarTabela() {
 		Statement stmt;
-		String sql = "CREATE TABLE UNIDADEMOVEL" 
-					  + "(id VARCHAR(255)," 
-					  + " latitude DOUBLE, " 
-					  + " longitude DOUBLE, "
-					  + " configuracao VARCHAR(255), "
-					  + " PRIMARY KEY (id))";
-		
 
 		try {
 			stmt = conexao.createStatement();
-			stmt.executeUpdate(sql);
+			stmt.executeUpdate(CREATE);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -46,15 +57,28 @@ public class H2Waiter implements H2CRUD {
 
 	@Override
 	public void inserir(UnidadeMovel unidade) {
-		String sql = "INSERT INTO UNIDADEMOVEL(id, latitude, longitude, configuracao) VALUES (?,?,?,?)";
-		PreparedStatement stmt;
+
+		System.out.println(unidade instanceof UnidadeEuclidiana);
+	
+		if (unidade instanceof UnidadeEuclidiana) {
+			inserirEuclidiana(unidade);
+		} else if (unidade instanceof UnidadeManhattan) {
+			inserirManhattan(unidade);
+		}
+
+	}
+	
+	public void inserirManhattan (UnidadeMovel unidade) {
+		
+		PreparedStatement stmt;		
 		
 		try {
-			stmt = conexao.prepareStatement(sql);
+			stmt = conexao.prepareStatement(INSERT);
 			stmt.setString(1, unidade.getId());
 			stmt.setFloat(2, unidade.getLatitude());
 			stmt.setFloat(3, unidade.getLongitude());
 			stmt.setString(4, unidade.getConfiguracao().toString());
+			stmt.setInt(5, H2Waiter.tipoDaUnidade);
 			stmt.execute();
 			stmt.close();
 
@@ -62,16 +86,35 @@ public class H2Waiter implements H2CRUD {
 			System.out.println("Nao e possivel inserir : chave primaria violada ! ");
 			System.exit(0);
 		}
+	}
+	
+	public void inserirEuclidiana (UnidadeMovel unidade) {
+	
+		PreparedStatement stmt;
+		tipoDaUnidade = 1;
 
+		try {
+			stmt = conexao.prepareStatement(INSERT);
+			stmt.setString(1, unidade.getId());
+			stmt.setFloat(2, unidade.getLatitude());
+			stmt.setFloat(3, unidade.getLongitude());
+			stmt.setString(4, unidade.getConfiguracao().toString());
+			stmt.setInt(5, H2Waiter.tipoDaUnidade);
+			stmt.execute();
+			stmt.close();
+
+		} catch (SQLException e) {
+			System.out.println("Nao e possivel inserir : chave primaria violada ! ");
+			System.exit(0);
+		}
 	}
 
 	@Override
 	public void atualizar(UnidadeMovel unidade) {
-		String sql = "update UNIDADEMOVEL set  latitude=?, longitude=?, configuracao=? where id=?";
 		PreparedStatement stmt;
 
 		try {
-			stmt = conexao.prepareStatement(sql);
+			stmt = conexao.prepareStatement(ATUALIZAR);
 			stmt.setFloat(1, unidade.getLatitude());
 			stmt.setFloat(2, unidade.getLongitude());
 			stmt.setString(3, unidade.getConfiguracao().toString());
@@ -103,12 +146,11 @@ public class H2Waiter implements H2CRUD {
 
 	@Override
 	public void consultar() {
-		String sql = " select * from UNIDADEMOVEL";
 		Statement stmt;
 
 		try {
 			stmt = conexao.createStatement();
-			ResultSet rs = stmt.executeQuery(sql);
+			ResultSet rs = stmt.executeQuery(CONSULTAR);
 
 			while (rs.next()) {
 				
