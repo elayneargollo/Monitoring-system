@@ -42,7 +42,7 @@ public abstract class UnidadeMovel {
 
 	@Override
 	public String toString() {
-		return "UnidadeMovel [id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + ", configuracao=" + configuracao + "]";
+		return "UnidadeMovel [id=" + id + ", latitude=" + latitude + ", longitude=" + longitude + ",equipamentos: " + configuracao.getEquipamentos() +"]";
 	}
 
 	public void setLongitude(float longitude) {
@@ -61,6 +61,6 @@ public abstract class UnidadeMovel {
 		return this.getId().equals(unidade.getId());
 	}
 
-	public abstract float distanciaEntreOrigemEDestino(float latitudeDestino, float longitudeDestino);
+	public abstract float getDistancia(float latitudeDestino, float longitudeDestino);
 
 }

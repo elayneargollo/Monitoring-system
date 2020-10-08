@@ -2,7 +2,7 @@ package ifba.ads.model;
 
 import java.sql.SQLException;
 
-import ifba.ads.controll.H2UNIDADEMOVEL;
+import ifba.ads.controll.H2unidadeMovel;
 
 public class AppTeste {
 

@@ -6,8 +6,9 @@ public class UnidadeManhattan extends UnidadeMovel{
 		super(id, latitude, longitude, configuracao);
 	}
 
+
 	@Override
-	public float distanciaEntreOrigemEDestino(float latitudeDestino, float longitudeDestino) {
+	public float getDistancia(float latitudeDestino, float longitudeDestino) {
 		
 		float distancia;
 		distancia = (float) (Math.pow((latitudeDestino - this.getLatitude()),2) - (long) Math.pow((latitudeDestino - this.getLongitude()),2));

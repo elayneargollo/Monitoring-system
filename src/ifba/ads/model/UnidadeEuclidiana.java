@@ -7,7 +7,7 @@ public class UnidadeEuclidiana extends UnidadeMovel {
 	}
 
 	@Override
-	public float distanciaEntreOrigemEDestino(float latitudeDestino, float longitudeDestino) {
+	public float getDistancia(float latitudeDestino, float longitudeDestino) {
 
 		float distancia;
 		distancia = (float) Math.sqrt(Math.pow((latitudeDestino - this.getLatitude()), 2)

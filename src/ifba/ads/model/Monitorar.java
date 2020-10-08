@@ -3,22 +3,34 @@ package ifba.ads.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ifba.ads.controll.H2UNIDADEMOVEL;
+import ifba.ads.controll.H2unidadeMovel;
+import ifba.ads.controll.UnidadeMovelDAO;
 
-public class Monitorar extends H2UNIDADEMOVEL  {
+public class Monitorar extends H2unidadeMovel  {
 
-	public ArrayList<UnidadeMovel> unidades = new ArrayList<>();;
+	UnidadeMovelDAO unidadeMovelDAO;
+	
+	public ArrayList<UnidadeMovel> unidades;
 	public ArrayList<UnidadeMovel> unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento = new ArrayList<>();
-
-	public String monitorar(float latitude, float longitude, boolean cameraDeVideo, boolean termometro,
+	
+	public Monitorar() {
+    	this.unidadeMovelDAO = new H2unidadeMovel();
+    }    
+	
+	public void addUnidade (UnidadeMovel unidade) {
+		this.unidadeMovelDAO.inserir(unidade);
+	}
+	
+ 	public String monitorar(float latitude, float longitude, boolean cameraDeVideo, boolean termometro,
 			boolean medidordeCo2, boolean medidorDeMetano) {
 
-		procuraUnidadeComRequisitoMinimo(cameraDeVideo,termometro, medidordeCo2, medidorDeMetano);
+ 		unidades = this.getUnidades();
+		
+ 		procuraUnidadeComRequisitoMinimo(cameraDeVideo,termometro, medidordeCo2, medidorDeMetano);
 
-		UnidadeMovel unidade = (getMenorDistancia(latitude, longitude));
-		atualizar(unidade);
-		consultar();
-		return "Unidade " + unidade.getId().toString() + " irá se deslocar";
+		UnidadeMovel unidadeProxima = (getMenorDistancia(latitude, longitude));
+		atualizar(unidadeProxima);
+		return "Unidade " + unidadeProxima.getId().toString() + " irá se deslocar";
 	}
 
 	public void procuraUnidadeComRequisitoMinimo(boolean cameraDeVideo, boolean termometro,boolean MedidordeCo2, boolean medidorDeMetano) {
@@ -39,7 +51,7 @@ public class Monitorar extends H2UNIDADEMOVEL  {
 
 				UnidadeMovel atual = it.next();
 
-				String configuracoesDaUnidade = (atual.getConfiguracao().equipamentos.toString());
+				String configuracoesDaUnidade = (atual.getConfiguracao().getEquipamentos().toString());
 
 				configuracoesDaUnidade = configuracoesDaUnidade.replace("[", "");
 				configuracoesDaUnidade = configuracoesDaUnidade.replace("]", "");
@@ -84,13 +96,13 @@ public class Monitorar extends H2UNIDADEMOVEL  {
 	public UnidadeMovel getMenorDistancia(float latitude, float longitude) {
 
 		float menorDistancia = unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.get(0)
-				.distanciaEntreOrigemEDestino(latitude, longitude);
+				.getDistancia(latitude, longitude);
 		UnidadeMovel unidadeQueIraSeDeslocar = unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.get(0);
 
 		for (int i = 0; i < unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.size(); i++) {
 
 			float distanciaDestaUnidade = unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.get(i)
-					.distanciaEntreOrigemEDestino(latitude, longitude);
+					.getDistancia(latitude, longitude);
 
 			if (menorDistancia > distanciaDestaUnidade) {
 				menorDistancia = distanciaDestaUnidade;
@@ -103,21 +115,4 @@ public class Monitorar extends H2UNIDADEMOVEL  {
 		return unidadeQueIraSeDeslocar;
 	}
 
-	public void inserirUnidades(UnidadeMovel unidade) {
-
-		boolean encontrado = false;
-
-		for (int i = 0; i < unidades.size(); i++) {
-			if (unidades.get(i).equals(unidade)) {
-				encontrado = true;
-			}
-		}
-
-		if (encontrado == false) {
-			unidades.add(unidade);
-			inserir(unidade);
-		} else
-			System.out.println("Não é possivel inserir a unidade: esta unidade já existe !");
-
-	}
 }

@@ -1,0 +1,3 @@
+2020-10-08 14:55:43 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIDADEMOVEL" already exists; SQL statement:
+CREATE TABLE UNIDADEMOVEL (id VARCHAR(255), latitude DOUBLE,  longitude DOUBLE,  configuracao VARCHAR(255),  tipoDaUnidade INT,  PRIMARY KEY (id)) [42101-193]

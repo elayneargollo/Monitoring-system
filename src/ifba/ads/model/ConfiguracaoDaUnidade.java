@@ -6,9 +6,8 @@ public class ConfiguracaoDaUnidade {
 
 	ArrayList<EquipamentoEnum> equipamentos = new ArrayList<>();
 
-	@Override
-	public String toString() {
-		return "ConfiguracaoDaUnidade [equipamentos = " + equipamentos + "]";
+	public ArrayList<EquipamentoEnum> getEquipamentos () {
+		return equipamentos;
 	}
 	
 	public void adicionarEquipamentosAUnidade(EquipamentoEnum equipamento) {
