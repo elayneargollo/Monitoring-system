@@ -24,7 +24,7 @@ public class Monitorar extends H2unidadeMovel  {
 	
  	public String unidadeMovelMaisProxima(float latitude, float longitude, boolean cameraDeVideo, boolean termometro,
 			boolean medidordeCo2, boolean medidorDeMetano) {
-
+ 		
  		this.procuraUnidadeComRequisitoMinimo(cameraDeVideo,termometro, medidordeCo2, medidorDeMetano);
 		this.atualizar(buscarUnidadeComMenorDistancia(latitude, longitude));
 		

@@ -56,7 +56,7 @@ public class MonitorDeUnidade extends JFrame {
 		setTitle("Monitoramento de Unidade Móvel");
 
 		start = new JPanel();
-		start.setPreferredSize(new Dimension(500, 360));
+		start.setPreferredSize(new Dimension(250, 360));
 		getContentPane().add(start, BorderLayout.CENTER);
 		start.setLayout(null);
 
@@ -118,14 +118,23 @@ public class MonitorDeUnidade extends JFrame {
 		btnMover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				areaMonitorada = new Monitorar();
-				
-				String resposta = (areaMonitorada.unidadeMovelMaisProxima(getLongitude(), getLatitude(), 
-							getCamera(), getTermomentro(), getMedidorC02(), getMedidorMetano()));
-				
-				JOptionPane.showMessageDialog(null, resposta);
-				
-				setVisible(false);
+			
+				try {
+					
+					areaMonitorada = new Monitorar();
+					
+					String resposta = (areaMonitorada.unidadeMovelMaisProxima(getLongitude(), getLatitude(), 
+								getCamera(), getTermomentro(), getMedidorC02(), getMedidorMetano()));
+					
+					JOptionPane.showMessageDialog(null, resposta);
+					setVisible(false);
+					
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(null, "Por favor, verifique sua resposta.");
+					setVisible(false);
+					System.exit(0);
+				}
+
 			}
 		});
 		
@@ -153,7 +162,7 @@ public class MonitorDeUnidade extends JFrame {
 		return Float.parseFloat(this.longitude.getText());
 	}
 
-	public float getLatitude() {
+	public float getLatitude() {		
 		return Float.parseFloat(this.latitude.getText());
 	}
 

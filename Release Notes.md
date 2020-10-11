@@ -1,5 +1,8 @@
 # Release Notes
 
+## 0.2.1
++ Implementação do tratamento de Exceptions
+
 ## 0.2.0
 + Interage com usuário
 
