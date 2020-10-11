@@ -24,6 +24,7 @@ public class AppTeste {
 		UnidadeMovel unidadeM = new UnidadeManhattan("teste2", 42, 24, configuracao2);
 
 		Monitorar areaMonitorada = new Monitorar();
+	//	areaMonitorada.unidadeMovelDAO.buscarUnidadesH2();
 
 		System.out.println("=> "+areaMonitorada.unidadeMovelMaisProxima(7, 5, true, false, true, false));
 

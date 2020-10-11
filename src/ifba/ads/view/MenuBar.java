@@ -1,5 +1,8 @@
 package ifba.ads.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -9,22 +12,43 @@ public class MenuBar {
 
 	public MenuBar(JFrame mainWindow) {
 
-		JMenuBar menuBar = new JMenuBar();
-		mainWindow.setJMenuBar(menuBar);
+		JMenuBar menu = new JMenuBar();
+		mainWindow.setJMenuBar(menu);
 
-		JMenu mnUnidades = new JMenu("Unidades");
-		menuBar.add(mnUnidades);
+		JMenu unidadesMenu = new JMenu("Unidades");
+		menu.add(unidadesMenu);
 
-		JMenuItem mntmBuscar = new JMenuItem("Buscar");
-		mnUnidades.add(mntmBuscar);
+		JMenuItem listarOpcao = new JMenuItem("Listar");
+		unidadesMenu.add(listarOpcao);
+		
+			listarOpcao.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					Listar obj = new Listar();
+					obj.main(null);
+				}
+			});
 
-		JMenu mnSobre = new JMenu("Sobre");
-		menuBar.add(mnSobre);
+		JMenu sobreOpcao = new JMenu("Sobre");
+		menu.add(sobreOpcao);
 
-		JMenuItem mntmVerso = new JMenuItem("Versão");
-		mnSobre.add(mntmVerso);
+		JMenuItem versaoOpcao = new JMenuItem("Versão");
+		sobreOpcao.add(versaoOpcao);
+		
+			versaoOpcao.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					Versao obj = new Versao();
+					obj.main(null);
+				}
+			});
 
-		JMenuItem mntmAjuda = new JMenuItem("Ajuda");
-		mnSobre.add(mntmAjuda);
+		JMenuItem ajudaOpcao = new JMenuItem("Ajuda");
+		sobreOpcao.add(ajudaOpcao);
+		
+		ajudaOpcao.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					Ajuda obj = new Ajuda();
+					obj.main(null);					
+				}
+			});
 	}
 }
