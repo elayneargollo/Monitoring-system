@@ -192,6 +192,7 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+
 		return unidades;
 
 	}

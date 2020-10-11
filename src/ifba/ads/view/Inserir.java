@@ -23,24 +23,22 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class MonitorDeUnidade extends JFrame {
+public class Inserir extends JFrame {
 
 	private JTextField latitude;
 	private JTextField longitude;
-	private Monitorar areaMonitorada;
 	private JCheckBox cameraDeVideo;
 	private JCheckBox medidorCO2;
 	private JCheckBox medidorMetano;
 	private JCheckBox termometro;
 	private JPanel start;
-	private String resposta;
 	private static MenuBar menuBar;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MonitorDeUnidade frame = new MonitorDeUnidade();
+					Inserir frame = new Inserir();
 					menuBar = new MenuBar(frame);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,12 +47,12 @@ public class MonitorDeUnidade extends JFrame {
 		});
 	}
 
-	public MonitorDeUnidade() {
+	public Inserir() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 
-		setTitle("Monitoramento de Unidade Móvel");
+		setTitle("Inserir");
 
 		start = new JPanel();
 		start.setPreferredSize(new Dimension(250, 360));
@@ -118,21 +116,7 @@ public class MonitorDeUnidade extends JFrame {
 
 		btnMover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				try {
-					areaMonitorada = new Monitorar();
-
-					resposta = (areaMonitorada.unidadeMovelMaisProxima(getLongitude(), getLatitude(), getCamera(),
-							getTermomentro(), getMedidorC02(), getMedidorMetano()));
-
-					JOptionPane.showMessageDialog(null, resposta);
-					setVisible(false);
-
-				} catch (NumberFormatException e) {
-					JOptionPane.showMessageDialog(null, "Por favor, verifique sua resposta.");
-					setVisible(false);
-				}
-
+				JOptionPane.showMessageDialog(null, "tem q terminar");
 			}
 		});
 
