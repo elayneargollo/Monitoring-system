@@ -1,5 +1,14 @@
 # Release Notes
 
+## 0.2.0
++ Interage com usuário
+
+## 0.1.5
++ Implementação da estrutura de menu
+
+## 0.1.4
++ Implementação da classe view 
+
 ## 0.1.3
 + Integração da classe de negocio com o banco
 

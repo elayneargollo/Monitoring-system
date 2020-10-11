@@ -9,6 +9,7 @@ import ifba.ads.controll.UnidadeMovelDAO;
 public class Monitorar extends H2unidadeMovel  {
 
 	UnidadeMovelDAO unidadeMovelDAO;
+	public String resposta;
 	public ArrayList<UnidadeMovel> unidades;
 	public ArrayList<UnidadeMovel> unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento = new ArrayList<>();
 	
@@ -60,7 +61,8 @@ public class Monitorar extends H2unidadeMovel  {
 			}
 
 			if (unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.size() == 0) {
-				System.out.println("Sistema n√£o tem unidades com requisitos minimos exigidos");
+				resposta = "Sistema n„o tem unidades com requisitos minimos exigidos";
+				System.out.println(resposta);
 				System.exit(0);
 			}
 

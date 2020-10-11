@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
@@ -33,7 +34,7 @@ public class MonitorDeUnidade extends JFrame {
 	private JCheckBox termometro;
 	private JPanel start;
 	private static MenuBar menuBar;
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -118,13 +119,18 @@ public class MonitorDeUnidade extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				areaMonitorada = new Monitorar();
-				System.out.println(areaMonitorada.unidadeMovelMaisProxima(getLongitude(), getLatitude(), getCamera(),
-						getTermomentro(), getMedidorC02(), getMedidorMetano()));
-
+				
+				String resposta = (areaMonitorada.unidadeMovelMaisProxima(getLongitude(), getLatitude(), 
+							getCamera(), getTermomentro(), getMedidorC02(), getMedidorMetano()));
+				
+				JOptionPane.showMessageDialog(null, resposta);
+				
+				setVisible(false);
 			}
 		});
-
+		
 		setVisible(true);
+	
 	}
 
 	public boolean getCamera() {
