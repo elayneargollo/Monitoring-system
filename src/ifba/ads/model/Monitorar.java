@@ -9,7 +9,7 @@ import ifba.ads.controll.UnidadeMovelDAO;
 public class Monitorar extends H2unidadeMovel  {
 
 	UnidadeMovelDAO unidadeMovelDAO;
-	public String resposta;
+	public boolean respostaStatus;
 	public ArrayList<UnidadeMovel> unidades;
 	public ArrayList<UnidadeMovel> unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento = new ArrayList<>();
 	
@@ -25,13 +25,16 @@ public class Monitorar extends H2unidadeMovel  {
  	public String unidadeMovelMaisProxima(float latitude, float longitude, boolean cameraDeVideo, boolean termometro,
 			boolean medidordeCo2, boolean medidorDeMetano) {
  		
- 		this.procuraUnidadeComRequisitoMinimo(cameraDeVideo,termometro, medidordeCo2, medidorDeMetano);
-		this.atualizar(buscarUnidadeComMenorDistancia(latitude, longitude));
+ 		respostaStatus = this.procuraUnidadeComRequisitoMinimo(cameraDeVideo,termometro, medidordeCo2, medidorDeMetano);
 		
-		return "Unidade " + buscarUnidadeComMenorDistancia(latitude, longitude).getId() + " irá se deslocar";
+ 		if (respostaStatus == true) {
+ 			this.atualizar(buscarUnidadeComMenorDistancia(latitude, longitude));
+ 			return "Unidade " + buscarUnidadeComMenorDistancia(latitude, longitude).getId() + " irá se deslocar";
+ 		} else 
+ 			return "Sistema não possui unidades com equipamentos minimos."; 		
 	}
 
-	public void procuraUnidadeComRequisitoMinimo(boolean cameraDeVideo, boolean termometro,boolean MedidordeCo2, boolean medidorDeMetano) {
+	public Boolean procuraUnidadeComRequisitoMinimo(boolean cameraDeVideo, boolean termometro,boolean MedidordeCo2, boolean medidorDeMetano) {
 
 		String equipamentosMinimosParaMonitoramento = equipamentosMinimos(cameraDeVideo, termometro, MedidordeCo2,
 				medidorDeMetano).toString();
@@ -61,12 +64,14 @@ public class Monitorar extends H2unidadeMovel  {
 			}
 
 			if (unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento.size() == 0) {
-				resposta = "Sistema não tem unidades com requisitos minimos exigidos";
-				System.out.println(resposta);
-				System.exit(0);
+				respostaStatus = false;
+				return respostaStatus;
+			//	System.out.println(resposta);
+			//	System.exit(0);
 			}
 
 		}
+		return true;
 
 	}
 

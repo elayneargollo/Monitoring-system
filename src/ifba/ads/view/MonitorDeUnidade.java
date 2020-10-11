@@ -33,6 +33,7 @@ public class MonitorDeUnidade extends JFrame {
 	private JCheckBox medidorMetano;
 	private JCheckBox termometro;
 	private JPanel start;
+	private String resposta;
 	private static MenuBar menuBar;
 
 	public static void main(String[] args) {
@@ -118,17 +119,15 @@ public class MonitorDeUnidade extends JFrame {
 		btnMover.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-			
 				try {
-					
 					areaMonitorada = new Monitorar();
-					
-					String resposta = (areaMonitorada.unidadeMovelMaisProxima(getLongitude(), getLatitude(), 
-								getCamera(), getTermomentro(), getMedidorC02(), getMedidorMetano()));
-					
+
+					resposta = (areaMonitorada.unidadeMovelMaisProxima(getLongitude(), getLatitude(), getCamera(),
+							getTermomentro(), getMedidorC02(), getMedidorMetano()));
+
 					JOptionPane.showMessageDialog(null, resposta);
 					setVisible(false);
-					
+
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(null, "Por favor, verifique sua resposta.");
 					setVisible(false);
@@ -137,9 +136,9 @@ public class MonitorDeUnidade extends JFrame {
 
 			}
 		});
-		
+
 		setVisible(true);
-	
+
 	}
 
 	public boolean getCamera() {
@@ -162,7 +161,7 @@ public class MonitorDeUnidade extends JFrame {
 		return Float.parseFloat(this.longitude.getText());
 	}
 
-	public float getLatitude() {		
+	public float getLatitude() {
 		return Float.parseFloat(this.latitude.getText());
 	}
 
