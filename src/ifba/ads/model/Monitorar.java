@@ -14,13 +14,13 @@ public class Monitorar extends H2unidadeMovel  {
 	public ArrayList<UnidadeMovel> unidadeMovelQuePossuiRequisitosMinimosDeMonitoramento = new ArrayList<>();
 	
 	public ArrayList<UnidadeMovel> getUnidades () {
-		this.unidades = buscarUnidadesH2();
+		this.unidades = buscarTodasAsUnidades();
 		return unidades;
 	}
 	
 	public Monitorar() {
     	this.unidadeMovelDAO = new H2unidadeMovel();
- 		this.unidades = buscarUnidadesH2();
+ 		this.unidades = buscarTodasAsUnidades();
     }    
 	
 	public void addUnidade (UnidadeMovel unidade) {

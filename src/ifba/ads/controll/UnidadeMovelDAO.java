@@ -8,7 +8,8 @@ public interface UnidadeMovelDAO {
 	
 	abstract void inserir(UnidadeMovel unidade);
 	abstract void atualizar(UnidadeMovel unidade);
-	abstract void deletar(UnidadeMovel unidade);
-	abstract ArrayList<UnidadeMovel> buscarUnidadesH2();
+	abstract int deletar(String id); // ok
+	abstract ArrayList<UnidadeMovel> buscarTodasAsUnidades(); // ok
+	abstract UnidadeMovel buscarPorId(String id); // ok
 	
 }

@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import ifba.ads.model.Monitorar;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
@@ -27,6 +29,7 @@ public class Buscar extends JFrame {
 	private JPanel contentPane;
 	private static MenuBar menuBar;
 	private JTextField idDaUnidade;
+	private Monitorar areaMonitorada;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -101,8 +104,17 @@ public class Buscar extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				JOptionPane.showMessageDialog(null, "Tem q terminar");
-				//setVisible(false);	
+				areaMonitorada = new Monitorar();
+
+				if (areaMonitorada.buscarPorId(getId()) == null || areaMonitorada.buscarPorId(getId()).toString().isBlank()) {
+					JOptionPane.showMessageDialog(null, "Não há essa unidade no sistema");
+				}else {
+					String resposta = areaMonitorada.buscarPorId(getId()).toString();	
+					JOptionPane.showMessageDialog(null, resposta);
+				}				
+			
+				setVisible(false);
+	
 			}
 		});
 		

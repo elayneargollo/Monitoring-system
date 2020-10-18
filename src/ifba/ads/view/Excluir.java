@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import ifba.ads.model.Monitorar;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
@@ -26,6 +28,7 @@ public class Excluir extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static MenuBar menuBar;
+	private Monitorar areaMonitorada;
 	private JTextField idDaUnidade;
 
 	public static void main(String[] args) {
@@ -101,8 +104,15 @@ public class Excluir extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				JOptionPane.showMessageDialog(null, "Tem q terminar");
-				//setVisible(false);	
+				areaMonitorada = new Monitorar();
+				
+				if(areaMonitorada.deletar(getId()) == 1) {
+					JOptionPane.showMessageDialog(null, "Unidade excluida.");
+				} else {
+					JOptionPane.showMessageDialog(null, "Não é possível excluir.");
+				}
+				
+				setVisible(false);	
 			}
 		});
 		

@@ -28,11 +28,11 @@ public class AppTeste {
 		
 		Monitorar areaMonitorada = new Monitorar();
 
-//		areaMonitorada.addUnidade(unidadeM);
-//		areaMonitorada.addUnidade(unidadeA);
-//		areaMonitorada.addUnidade(unidade);
+		areaMonitorada.addUnidade(unidadeM);
+		areaMonitorada.addUnidade(unidadeA);
+		areaMonitorada.addUnidade(unidade);
 
-		System.out.println("=> "+areaMonitorada.unidadeMovelMaisProxima(7, 5, true, false, true, false));	
+		//System.out.println("=> "+areaMonitorada.unidadeMovelMaisProxima(7, 5, true, false, true, false));	
 
 	}
 

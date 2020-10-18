@@ -46,8 +46,17 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 	private final String ATUALIZAR  = "update UNIDADEMOVEL  "
 									+ "set  latitude=?, longitude=?, configuracao=? "
 									+ "where id=?";
+
+	private final String CONSULTAR = "select * from UNIDADEMOVEL ";
 	
-	private final String CONSULTAR = " select * from UNIDADEMOVEL DADE";
+	private final String BUSCAR_POR_ID = "select * "						
+								+ " from UNIDADEMOVEL "
+								+ " where id=?";
+	
+	private final String DELETE =  "delete "						
+								+ " from UNIDADEMOVEL "
+								+ " where id=?";
+
 
 	public H2unidadeMovel() {
 		try {
@@ -142,24 +151,29 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 	}
 
 	@Override
-	public void deletar(UnidadeMovel unidade) {
-		String sql = "delete from UNIDADEMOVEL where id=? ";
+	public int deletar(String id) {
+		
 		PreparedStatement stmt;
+		int status = 0;
 		
 		try {
-			stmt = conexao.prepareStatement(sql);
-			stmt.setString(1, unidade.getId());
-			stmt.execute();
-			stmt.close();
 
+			PreparedStatement ps = this.conexao.prepareStatement(DELETE);
+			ps.setString(1, id);
+			
+			status = ps.executeUpdate();
+			
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+		
+		return status;
 
 	}
 
 		
-	public ArrayList<UnidadeMovel> buscarUnidadesH2() {
+	public ArrayList<UnidadeMovel> buscarTodasAsUnidades() {
 		Statement stmt;
 		
 		ArrayList<UnidadeMovel> unidades = new ArrayList<>();
@@ -212,5 +226,45 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 		}
 
 		return configuracao;
+	}
+
+	
+	@Override
+	public UnidadeMovel buscarPorId(String id) {
+		
+		Statement stmt;
+		UnidadeMovel unidade = null;
+		
+		try {
+			PreparedStatement ps = this.conexao.prepareStatement(BUSCAR_POR_ID);
+			ps.setString(1, id);
+			
+			ResultSet result = ps.executeQuery();
+
+			while (result.next()) {
+				int tipoDaUnidade = result.getInt("tipoDaUnidade");
+				ConfiguracaoDaUnidade configuracao =  gerarConfiguracaoEnum(result);
+				
+				if (tipoDaUnidade == 0) {
+					unidade = new UnidadeEuclidiana(result.getString("id"), 
+							result.getFloat("latitude"), 
+							result.getFloat("longitude"), 
+							configuracao);
+				
+				} 
+				else if (tipoDaUnidade == 1) {
+					unidade = new UnidadeManhattan(result.getString("id"), 
+													result.getFloat("latitude"), 
+													result.getFloat("longitude"), 
+													configuracao);
+				}
+				
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+		return unidade;
 	}
 }

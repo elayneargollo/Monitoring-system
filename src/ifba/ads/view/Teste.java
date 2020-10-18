@@ -123,7 +123,7 @@ public class Teste extends JFrame {
 	
 	public String getUnidades() {
 		
-		unidades = new Monitorar().buscarUnidadesH2();		
+		unidades = new Monitorar().buscarTodasAsUnidades();		
 		String str = "\n";
 		
 		for (int i=0; i<unidades.size(); i++) {
