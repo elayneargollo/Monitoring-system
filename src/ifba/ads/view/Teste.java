@@ -21,13 +21,16 @@ import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -35,12 +38,23 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class Teste extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	
+	private JCheckBox cameraDeVideo;
+	private JCheckBox medidorCO2;
+	private JCheckBox medidorMetano;
+	private JCheckBox termometro;
+	
+	private JPanel start;
 	private static MenuBar menuBar;
+	
+	private JTextField textLatitude;
+	private JTextField textLongitude;
+	private JCheckBox unidadeManhattan;
+	private JCheckBox unidadeEuclidiana;
 	private Monitorar areaMonitorada;
-	ArrayList<UnidadeMovel> unidades;
-	private JTextField textField;
+	private JLabel lblID;
+	private JTextField textID;
+
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -59,78 +73,99 @@ public class Teste extends JFrame {
 	public Teste() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+
+		setTitle("Inserir");
+
+		start = new JPanel();
+		start.setPreferredSize(new Dimension(250, 460));
+		getContentPane().add(start, BorderLayout.CENTER);
+		start.setLayout(null);
+
+		JPanel equipamento = new JPanel();
+		equipamento.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Equipamentos",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
+		equipamento.setBounds(23, 231, 213, 139);
+		start.add(equipamento);
+		equipamento.setLayout(null);
+
+		cameraDeVideo = new JCheckBox("Câmera de Vídeo");
+		cameraDeVideo.setBounds(27, 23, 145, 23);
+		equipamento.add(cameraDeVideo);
+
+		medidorCO2 = new JCheckBox("Medidor de CO2");
+		medidorCO2.setBounds(27, 50, 137, 23);
+		equipamento.add(medidorCO2);
+
+		medidorMetano = new JCheckBox("Medidor de Metano");
+		medidorMetano.setBounds(27, 78, 163, 23);
+		equipamento.add(medidorMetano);
+
+		termometro = new JCheckBox("Termômetro");
+		termometro.setBounds(27, 105, 111, 23);
+		equipamento.add(termometro);
+
+		JPanel tipoUnidade = new JPanel();
+		tipoUnidade.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Tipo de Unidade", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
+		tipoUnidade.setBounds(23, 133, 213, 87);
+		start.add(tipoUnidade);
+		tipoUnidade.setLayout(null);
 		
-		setTitle("Det");
+		unidadeManhattan = new JCheckBox("Unidade Manhattan");
+		unidadeManhattan.setBounds(33, 25, 151, 23);
+		tipoUnidade.add(unidadeManhattan);
 		
-		contentPane = new JPanel();
-		contentPane.setPreferredSize(new Dimension(250, 250));
-		getContentPane().add(contentPane, BorderLayout.CENTER);
-		contentPane.setLayout(null);
+		unidadeEuclidiana = new JCheckBox("Unidade Euclidiana");
+		unidadeEuclidiana.setBounds(33, 51, 140, 23);
+		tipoUnidade.add(unidadeEuclidiana);
+		;
+
+		JButton btnInserir = new JButton("Inserir");
+		btnInserir.setBounds(23, 388, 213, 25);
+		start.add(btnInserir);
 		
+				
+		JPanel localizacao = new JPanel();
+		localizacao.setLayout(null);
+		localizacao.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
+		localizacao.setBounds(23, 11, 213, 111);
+		start.add(localizacao);
+		
+		JLabel lblLatitude_1 = new JLabel("Latitude");
+		lblLatitude_1.setBounds(10, 24, 60, 15);
+		localizacao.add(lblLatitude_1);
+		
+		textLatitude = new JTextField();
+		textLatitude.setColumns(10);
+		textLatitude.setBounds(75, 22, 114, 19);
+		localizacao.add(textLatitude);
+		
+		JLabel lblLongitude_1 = new JLabel("Longitude");
+		lblLongitude_1.setBounds(10, 51, 79, 15);
+		localizacao.add(lblLongitude_1);
+		
+		textLongitude = new JTextField();
+		textLongitude.setColumns(10);
+		textLongitude.setBounds(75, 49, 114, 19);
+		localizacao.add(textLongitude);
+		
+		lblID = new JLabel("ID");
+		lblID.setBounds(10, 77, 46, 14);
+		localizacao.add(lblID);
+		
+		textID = new JTextField();
+		textID.setBounds(75, 74, 114, 20);
+		localizacao.add(textID);
+		textID.setColumns(10);
 		pack();
 		setLocationRelativeTo(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Deletar Unidade", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(10, 25, 230, 150);
-		contentPane.add(panel);
-		
-		JLabel lblNewLabel = new JLabel("ID :");
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		
-		JLabel lblNewLabel_1 = new JLabel("Insira a informa\u00E7\u00E3o da unidade\r\n");
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(4)
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(37)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)))
-					.addGap(15))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(20)
-					.addComponent(lblNewLabel_1)
-					.addGap(26)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(9))
-		);
-		panel.setLayout(gl_panel);
-		
+		btnInserir.addActionListener(new ActionListener() {
 			
-		JButton btnNewButton = new JButton("Deletar\r\n");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);	
+			public void actionPerformed(ActionEvent arg0) {
+				
 			}
-		});
-		
-		btnNewButton.setBounds(10, 186, 219, 23);
-		contentPane.add(btnNewButton);
+			});
+		}
 	}
 	
-	public String getUnidades() {
-		
-		unidades = new Monitorar().buscarTodasAsUnidades();		
-		String str = "\n";
-		
-		for (int i=0; i<unidades.size(); i++) {
-			str += unidades.get(i) + "\n";
-		}
-		
-		return str;
-	}
-}
 

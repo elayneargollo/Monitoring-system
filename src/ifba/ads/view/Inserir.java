@@ -39,6 +39,7 @@ public class Inserir extends JFrame {
 	
 	private JTextField textLatitude;
 	private JTextField textLongitude;
+	private JTextField textID;
 	private JCheckBox unidadeManhattan;
 	private JCheckBox unidadeEuclidiana;
 	private Monitorar areaMonitorada;
@@ -65,14 +66,14 @@ public class Inserir extends JFrame {
 		setTitle("Inserir");
 
 		start = new JPanel();
-		start.setPreferredSize(new Dimension(250, 430));
+		start.setPreferredSize(new Dimension(250, 460));
 		getContentPane().add(start, BorderLayout.CENTER);
 		start.setLayout(null);
 
 		JPanel equipamento = new JPanel();
 		equipamento.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Equipamentos",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
-		equipamento.setBounds(23, 207, 213, 139);
+		equipamento.setBounds(23, 231, 213, 139);
 		start.add(equipamento);
 		equipamento.setLayout(null);
 
@@ -94,7 +95,7 @@ public class Inserir extends JFrame {
 
 		JPanel tipoUnidade = new JPanel();
 		tipoUnidade.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Tipo de Unidade", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
-		tipoUnidade.setBounds(23, 109, 213, 87);
+		tipoUnidade.setBounds(23, 133, 213, 87);
 		start.add(tipoUnidade);
 		tipoUnidade.setLayout(null);
 		
@@ -108,14 +109,14 @@ public class Inserir extends JFrame {
 		;
 
 		JButton btnInserir = new JButton("Inserir");
-		btnInserir.setBounds(23, 357, 213, 25);
+		btnInserir.setBounds(23, 388, 213, 25);
 		start.add(btnInserir);
 		
 				
 		JPanel localizacao = new JPanel();
 		localizacao.setLayout(null);
-		localizacao.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Localiza\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
-		localizacao.setBounds(23, 11, 213, 87);
+		localizacao.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
+		localizacao.setBounds(23, 11, 213, 111);
 		start.add(localizacao);
 		
 		JLabel lblLatitude_1 = new JLabel("Latitude");
@@ -135,8 +136,19 @@ public class Inserir extends JFrame {
 		textLongitude.setColumns(10);
 		textLongitude.setBounds(75, 49, 114, 19);
 		localizacao.add(textLongitude);
+		
+		JLabel lblID = new JLabel("ID");
+		lblID.setBounds(10, 77, 46, 14);
+		localizacao.add(lblID);
+		
+		textID = new JTextField();
+		textID.setBounds(75, 74, 114, 20);
+		localizacao.add(textID);
+		textID.setColumns(10);
+		
 		pack();
 		setLocationRelativeTo(null);
+		
 		
 		btnInserir.addActionListener(new ActionListener() {
 			
@@ -146,7 +158,6 @@ public class Inserir extends JFrame {
 				}else {
 					JOptionPane.showMessageDialog(null, "Tente novamente.");
 				}
-			
 			}
 		});	
 		
@@ -168,7 +179,7 @@ public class Inserir extends JFrame {
 			return 0;
 		}
 		
-		unidade.setId("nqq");
+		unidade.setId(getID());
 		unidade.setLatitude(getLatitude());
 		unidade.setLongitude(getLongitude());
 		
@@ -211,6 +222,10 @@ public class Inserir extends JFrame {
 
 	public float getLatitude() {
 		return Float.parseFloat(this.textLatitude.getText());
+	}
+	
+	public String getID() {
+		return this.textID.getText();
 	}
 
 }
