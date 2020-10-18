@@ -49,8 +49,7 @@ public class Inserir extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					
+				try {					
 					Inserir frame = new Inserir();
 					menuBar = new MenuBar(frame);
 					frame.setVisible(true);
@@ -67,12 +66,19 @@ public class Inserir extends JFrame {
 		
 		btnInserir.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent arg0) {
-				if(getResponse() > 0) {
-					JOptionPane.showMessageDialog(null, "Inserida com sucesso.");
-				}else {
-					JOptionPane.showMessageDialog(null, "Tente novamente.");
+				
+				try {	
+					if(getResponse() > 0) {
+						JOptionPane.showMessageDialog(null, "Inserida com sucesso.");
+					}else {
+						JOptionPane.showMessageDialog(null, "Tente novamente.");
+					}
+				} catch(java.lang.RuntimeException e){
+					JOptionPane.showMessageDialog(null, "Esta unidade já existe.");
 				}
+				
 				setVisible(false);
+				System.exit(0);
 			}
 		});		
 	}
@@ -169,10 +175,10 @@ public class Inserir extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
-	
 	public int getResponse() {
 	
 		int status = 0;
+		
 		UnidadeMovel unidade = null;
 		areaMonitorada = new Monitorar();
 

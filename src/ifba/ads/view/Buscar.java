@@ -114,7 +114,7 @@ public class Buscar extends JFrame {
 				}				
 			
 				setVisible(false);
-	
+				System.exit(0);
 			}
 		});
 		

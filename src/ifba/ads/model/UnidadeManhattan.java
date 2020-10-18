@@ -2,14 +2,13 @@ package ifba.ads.model;
 
 public class UnidadeManhattan extends UnidadeMovel{
 
+	public UnidadeManhattan() {
+	}
+	
 	public UnidadeManhattan(String id, float latitude, float longitude, ConfiguracaoDaUnidade configuracao) {
 		super(id, latitude, longitude, configuracao);
 	}
 
-	public UnidadeManhattan() {
-		
-	}
-	
 	@Override
 	public float getDistancia(float latitudeDestino, float longitudeDestino) {
 		

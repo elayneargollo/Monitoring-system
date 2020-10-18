@@ -31,9 +31,7 @@ public class ConfiguracaoDaUnidade {
 		}
 		if (medidorDeMetano == true) {
 			equipamentos.add(EquipamentoEnum.MEDIDORDEMETANO);
-		}
-		
-		
+		}		
 	}
 	
 }

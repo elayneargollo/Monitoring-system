@@ -57,7 +57,6 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 								+ " from UNIDADEMOVEL "
 								+ " where id=?";
 
-
 	public H2unidadeMovel() {
 		try {
 			conexao = DriverManager.getConnection(URI, USUARIO, SENHA);
@@ -78,7 +77,6 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 		}
 
 		return "Tabela criada !";
-
 	}
 
 	@Override
@@ -89,7 +87,6 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 		} else if (unidade instanceof UnidadeManhattan) {
 			inserirManhattan(unidade);
 		}
-
 	}
 	
 	public void inserirManhattan (UnidadeMovel unidade) {
@@ -107,8 +104,7 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 			stmt.close();
 
 		} catch (SQLException e) {
-			System.out.println(e);
-			System.exit(0);
+			throw new RuntimeException(e);
 		}
 	}
 	
@@ -127,8 +123,7 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 			stmt.close();
 
 		} catch (SQLException e) {
-			System.out.println(e);
-			System.exit(0);
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -159,19 +154,14 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 		try {
 
 			PreparedStatement ps = this.conexao.prepareStatement(DELETE);
-			ps.setString(1, id);
-			
+			ps.setString(1, id);			
 			status = ps.executeUpdate();
-			
 			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		
 		return status;
-
 	}
-
 		
 	public ArrayList<UnidadeMovel> buscarTodasAsUnidades() {
 		Statement stmt;
@@ -227,7 +217,6 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 
 		return configuracao;
 	}
-
 	
 	@Override
 	public UnidadeMovel buscarPorId(String id) {
@@ -257,8 +246,7 @@ public class H2unidadeMovel implements UnidadeMovelDAO {
 													result.getFloat("latitude"), 
 													result.getFloat("longitude"), 
 													configuracao);
-				}
-				
+				}			
 			}
 			
 		} catch (SQLException e) {

@@ -113,6 +113,7 @@ public class Excluir extends JFrame {
 				}
 				
 				setVisible(false);	
+				System.exit(0);
 			}
 		});
 		

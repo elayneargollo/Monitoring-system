@@ -8,7 +8,6 @@ public abstract class UnidadeMovel {
 	public ConfiguracaoDaUnidade configuracao;
 
 	public UnidadeMovel() {
-		
 	}
 	
 	public UnidadeMovel(String id, float latitude, float longitude, ConfiguracaoDaUnidade configuracao) {
