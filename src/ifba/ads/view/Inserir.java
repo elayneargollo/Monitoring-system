@@ -111,35 +111,7 @@ public class Inserir extends JFrame {
 		btnInserir.setBounds(23, 357, 213, 25);
 		start.add(btnInserir);
 		
-		btnInserir.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-
-				UnidadeMovel unidade = null;
-				areaMonitorada = new Monitorar();
-		
-				if (getEuclidiana()) {
-					unidade = new UnidadeEuclidiana();
-				} else if(getManhattan()){
-					unidade = new UnidadeManhattan();
-				} else {
-					JOptionPane.showMessageDialog(null, "Selecione um tipo de unidade.");
-				}
 				
-				unidade.setId("en");
-				unidade.setLatitude(getLatitude());
-				unidade.setLongitude(getLongitude());
-				
-				ConfiguracaoDaUnidade configuracao = new ConfiguracaoDaUnidade();				
-				configuracao.adicionarEquipamentosAUnidade(getCamera(), getTermomentro(),getMedidorC02(), getMedidorMetano());
-				
-				unidade.setConfiguracao(configuracao);
-				System.out.println(configuracao.getEquipamentos());
-				areaMonitorada.addUnidade(unidade);
-				
-			}
-		});
-		
 		JPanel localizacao = new JPanel();
 		localizacao.setLayout(null);
 		localizacao.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Localiza\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
@@ -166,7 +138,47 @@ public class Inserir extends JFrame {
 		pack();
 		setLocationRelativeTo(null);
 		
+		btnInserir.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				if(getResponse() > 0) {
+					JOptionPane.showMessageDialog(null, "Inserida com sucesso.");
+				}else {
+					JOptionPane.showMessageDialog(null, "Tente novamente.");
+				}
+			
+			}
+		});	
 		
+	}
+	
+	public int getResponse() {
+	
+		int status = 0;
+		UnidadeMovel unidade = null;
+		areaMonitorada = new Monitorar();
+
+		if (getEuclidiana()) {
+			status = 1;
+			unidade = new UnidadeEuclidiana();
+		} else if(getManhattan()){
+			status = 2;
+			unidade = new UnidadeManhattan();
+		} else {
+			return 0;
+		}
+		
+		unidade.setId("nqq");
+		unidade.setLatitude(getLatitude());
+		unidade.setLongitude(getLongitude());
+		
+		ConfiguracaoDaUnidade configuracao = new ConfiguracaoDaUnidade();				
+		configuracao.adicionarEquipamentosAUnidade(getCamera(), getTermomentro(),getMedidorC02(), getMedidorMetano());
+		
+		unidade.setConfiguracao(configuracao);
+		areaMonitorada.addUnidade(unidade);
+		
+		return status;
 	}
 
 	public boolean getCamera() {
