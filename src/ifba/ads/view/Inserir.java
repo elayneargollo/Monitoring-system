@@ -33,6 +33,7 @@ public class Inserir extends JFrame {
 	private JCheckBox medidorCO2;
 	private JCheckBox medidorMetano;
 	private JCheckBox termometro;
+	private JButton btnInserir;
 	
 	private JPanel start;
 	private static MenuBar menuBar;
@@ -49,6 +50,7 @@ public class Inserir extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					Inserir frame = new Inserir();
 					menuBar = new MenuBar(frame);
 					frame.setVisible(true);
@@ -58,8 +60,25 @@ public class Inserir extends JFrame {
 			}
 		});
 	}
-
+	
 	public Inserir() {
+		
+		inicializar();
+		
+		btnInserir.addActionListener(new ActionListener() {			
+			public void actionPerformed(ActionEvent arg0) {
+				if(getResponse() > 0) {
+					JOptionPane.showMessageDialog(null, "Inserida com sucesso.");
+				}else {
+					JOptionPane.showMessageDialog(null, "Tente novamente.");
+				}
+				setVisible(false);
+			}
+		});		
+	}
+	
+	public void inicializar() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 
@@ -108,7 +127,7 @@ public class Inserir extends JFrame {
 		tipoUnidade.add(unidadeEuclidiana);
 		;
 
-		JButton btnInserir = new JButton("Inserir");
+		btnInserir = new JButton("Inserir");
 		btnInserir.setBounds(23, 388, 213, 25);
 		start.add(btnInserir);
 		
@@ -148,20 +167,8 @@ public class Inserir extends JFrame {
 		
 		pack();
 		setLocationRelativeTo(null);
-		
-		
-		btnInserir.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				if(getResponse() > 0) {
-					JOptionPane.showMessageDialog(null, "Inserida com sucesso.");
-				}else {
-					JOptionPane.showMessageDialog(null, "Tente novamente.");
-				}
-			}
-		});	
-		
 	}
+
 	
 	public int getResponse() {
 	
