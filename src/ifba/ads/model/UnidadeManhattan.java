@@ -6,7 +6,10 @@ public class UnidadeManhattan extends UnidadeMovel{
 		super(id, latitude, longitude, configuracao);
 	}
 
-
+	public UnidadeManhattan() {
+		
+	}
+	
 	@Override
 	public float getDistancia(float latitudeDestino, float longitudeDestino) {
 		

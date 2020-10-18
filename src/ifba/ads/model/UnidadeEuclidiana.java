@@ -5,6 +5,10 @@ public class UnidadeEuclidiana extends UnidadeMovel {
 	public UnidadeEuclidiana(String id, float latitude, float longitude, ConfiguracaoDaUnidade configuracao) {
 		super(id, latitude, longitude, configuracao);
 	}
+	
+	public UnidadeEuclidiana() {
+		
+	}
 
 	@Override
 	public float getDistancia(float latitudeDestino, float longitudeDestino) {

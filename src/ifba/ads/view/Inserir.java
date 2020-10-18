@@ -7,7 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import ifba.ads.model.ConfiguracaoDaUnidade;
 import ifba.ads.model.Monitorar;
+import ifba.ads.model.UnidadeEuclidiana;
+import ifba.ads.model.UnidadeManhattan;
+import ifba.ads.model.UnidadeMovel;
 
 import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
@@ -24,15 +28,21 @@ import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class Inserir extends JFrame {
-
-	private JTextField latitude;
-	private JTextField longitude;
+	
 	private JCheckBox cameraDeVideo;
 	private JCheckBox medidorCO2;
 	private JCheckBox medidorMetano;
 	private JCheckBox termometro;
+	
 	private JPanel start;
 	private static MenuBar menuBar;
+	
+	private JTextField textLatitude;
+	private JTextField textLongitude;
+	private JCheckBox unidadeManhattan;
+	private JCheckBox unidadeEuclidiana;
+	private Monitorar areaMonitorada;
+
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -40,6 +50,7 @@ public class Inserir extends JFrame {
 				try {
 					Inserir frame = new Inserir();
 					menuBar = new MenuBar(frame);
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -48,21 +59,20 @@ public class Inserir extends JFrame {
 	}
 
 	public Inserir() {
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 
 		setTitle("Inserir");
 
 		start = new JPanel();
-		start.setPreferredSize(new Dimension(250, 360));
+		start.setPreferredSize(new Dimension(250, 430));
 		getContentPane().add(start, BorderLayout.CENTER);
 		start.setLayout(null);
 
 		JPanel equipamento = new JPanel();
 		equipamento.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Equipamentos",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
-		equipamento.setBounds(23, 137, 213, 139);
+		equipamento.setBounds(23, 207, 213, 139);
 		start.add(equipamento);
 		equipamento.setLayout(null);
 
@@ -82,46 +92,80 @@ public class Inserir extends JFrame {
 		termometro.setBounds(27, 105, 111, 23);
 		equipamento.add(termometro);
 
-		JPanel localizacao = new JPanel();
-		localizacao.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Localiza\u00E7\u00E3o",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
-		localizacao.setBounds(23, 28, 213, 87);
-		start.add(localizacao);
-		localizacao.setLayout(null);
-
-		JLabel lblLatitude = new JLabel("Latitude");
-		lblLatitude.setBounds(10, 24, 60, 15);
-		localizacao.add(lblLatitude);
-
-		latitude = new JTextField();
-		latitude.setBounds(75, 22, 114, 19);
+		JPanel tipoUnidade = new JPanel();
+		tipoUnidade.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Tipo de Unidade", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
+		tipoUnidade.setBounds(23, 109, 213, 87);
+		start.add(tipoUnidade);
+		tipoUnidade.setLayout(null);
+		
+		unidadeManhattan = new JCheckBox("Unidade Manhattan");
+		unidadeManhattan.setBounds(33, 25, 151, 23);
+		tipoUnidade.add(unidadeManhattan);
+		
+		unidadeEuclidiana = new JCheckBox("Unidade Euclidiana");
+		unidadeEuclidiana.setBounds(33, 51, 140, 23);
+		tipoUnidade.add(unidadeEuclidiana);
 		;
-		localizacao.add(latitude);
-		latitude.setColumns(10);
 
-		JLabel lblLongitude = new JLabel("Longitude");
-		lblLongitude.setBounds(10, 51, 79, 15);
-		localizacao.add(lblLongitude);
-
-		longitude = new JTextField();
-		longitude.setBounds(97, 49, 92, 19);
-		localizacao.add(longitude);
-		longitude.setColumns(10);
-
-		JButton btnMover = new JButton("Mover");
-		btnMover.setBounds(23, 296, 213, 25);
-		start.add(btnMover);
-		pack();
-		setLocationRelativeTo(null);
-
-		btnMover.addActionListener(new ActionListener() {
+		JButton btnInserir = new JButton("Inserir");
+		btnInserir.setBounds(23, 357, 213, 25);
+		start.add(btnInserir);
+		
+		btnInserir.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "tem q terminar");
+
+				UnidadeMovel unidade = null;
+				areaMonitorada = new Monitorar();
+		
+				if (getEuclidiana()) {
+					unidade = new UnidadeEuclidiana();
+				} else if(getManhattan()){
+					unidade = new UnidadeManhattan();
+				} else {
+					JOptionPane.showMessageDialog(null, "Selecione um tipo de unidade.");
+				}
+				
+				unidade.setId("Natalia");
+				unidade.setLatitude(getLatitude());
+				unidade.setLongitude(getLongitude());
+				
+				ConfiguracaoDaUnidade configuracao = new ConfiguracaoDaUnidade();				
+				configuracao.adicionarEquipamentosAUnidade(getCamera(), getTermomentro(),getMedidorC02(), getMedidorMetano());
+				
+				unidade.setConfiguracao(configuracao);
+				areaMonitorada.addUnidade(unidade);
+				
 			}
 		});
-
-		setVisible(true);
-
+		
+		JPanel localizacao = new JPanel();
+		localizacao.setLayout(null);
+		localizacao.setBorder(new TitledBorder(new LineBorder(new Color(184, 207, 229)), "Localiza\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 51, 51)));
+		localizacao.setBounds(23, 11, 213, 87);
+		start.add(localizacao);
+		
+		JLabel lblLatitude_1 = new JLabel("Latitude");
+		lblLatitude_1.setBounds(10, 24, 60, 15);
+		localizacao.add(lblLatitude_1);
+		
+		textLatitude = new JTextField();
+		textLatitude.setColumns(10);
+		textLatitude.setBounds(75, 22, 114, 19);
+		localizacao.add(textLatitude);
+		
+		JLabel lblLongitude_1 = new JLabel("Longitude");
+		lblLongitude_1.setBounds(10, 51, 79, 15);
+		localizacao.add(lblLongitude_1);
+		
+		textLongitude = new JTextField();
+		textLongitude.setColumns(10);
+		textLongitude.setBounds(75, 49, 114, 19);
+		localizacao.add(textLongitude);
+		pack();
+		setLocationRelativeTo(null);
+		
+		
 	}
 
 	public boolean getCamera() {
@@ -139,13 +183,21 @@ public class Inserir extends JFrame {
 	public boolean getMedidorMetano() {
 		return this.medidorMetano.isSelected();
 	}
+	
+	public boolean getEuclidiana() {
+		return this.unidadeEuclidiana.isSelected();
+	}
+	
+	public boolean getManhattan() {
+		return this.unidadeManhattan.isSelected();
+	}
 
 	public float getLongitude() {
-		return Float.parseFloat(this.longitude.getText());
+		return Float.parseFloat(this.textLongitude.getText());
 	}
 
 	public float getLatitude() {
-		return Float.parseFloat(this.latitude.getText());
+		return Float.parseFloat(this.textLatitude.getText());
 	}
 
 }
