@@ -18,8 +18,7 @@ public class ConfiguracaoDaUnidade {
 		equipamentos.remove(equipamento);
 	}
 	
-
-	public void adicionarEquipamentosAUnidade(boolean cameraDeVideo, boolean termometro, boolean MedidordeCo2, boolean MedidordeMetano) {
+	public void adicionarEquipamentosAUnidade(boolean cameraDeVideo, boolean termometro, boolean medidorDeCo2, boolean medidorDeMetano) {
 
 		if (cameraDeVideo == true) {
 			equipamentos.add(EquipamentoEnum.CAMERADEVIDEO);
@@ -27,10 +26,10 @@ public class ConfiguracaoDaUnidade {
 		if (termometro == true) {
 			equipamentos.add(EquipamentoEnum.TERMOMETRO);
 		}
-		if (MedidordeCo2 == true) {
+		if (medidorDeCo2 == true) {
 			equipamentos.add(EquipamentoEnum.MEDIDORDEC02);
 		}
-		if (MedidordeMetano == true) {
+		if (medidorDeMetano == true) {
 			equipamentos.add(EquipamentoEnum.MEDIDORDEMETANO);
 		}
 		

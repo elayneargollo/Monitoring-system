@@ -126,7 +126,7 @@ public class Inserir extends JFrame {
 					JOptionPane.showMessageDialog(null, "Selecione um tipo de unidade.");
 				}
 				
-				unidade.setId("Natalia");
+				unidade.setId("en");
 				unidade.setLatitude(getLatitude());
 				unidade.setLongitude(getLongitude());
 				
@@ -134,6 +134,7 @@ public class Inserir extends JFrame {
 				configuracao.adicionarEquipamentosAUnidade(getCamera(), getTermomentro(),getMedidorC02(), getMedidorMetano());
 				
 				unidade.setConfiguracao(configuracao);
+				System.out.println(configuracao.getEquipamentos());
 				areaMonitorada.addUnidade(unidade);
 				
 			}
