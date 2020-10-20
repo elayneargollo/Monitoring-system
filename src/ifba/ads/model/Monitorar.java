@@ -35,9 +35,9 @@ public class Monitorar extends H2unidadeMovel  {
 		
  		if (respostaStatus == true) {
  			this.atualizar(buscarUnidadeComMenorDistancia(latitude, longitude));
- 			return "Unidade " + buscarUnidadeComMenorDistancia(latitude, longitude).getId() + " ir· se deslocar";
+ 			return "Unidade " + buscarUnidadeComMenorDistancia(latitude, longitude).getId() + " ira se deslocar";
  		} else 
- 			return "Sistema n„o possui unidades com equipamentos minimos."; 		
+ 			return "Sistema n√£o possui unidades com equipamentos minimos."; 		
 	}
 
 	public Boolean procuraUnidadeComRequisitoMinimo(boolean cameraDeVideo, boolean termometro,boolean MedidordeCo2, boolean medidorDeMetano) {
