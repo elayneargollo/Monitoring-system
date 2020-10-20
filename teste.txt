@@ -1,3 +1,0 @@
-PERSISTENCIA = P;
-LOGICA= L;
-UI = U;
