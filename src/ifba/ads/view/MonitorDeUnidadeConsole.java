@@ -21,6 +21,7 @@ public class MonitorDeUnidadeConsole implements UnidadeMovelUI {
 			this.unidadeLogica = logica;			
 		}
 		
+		@Override
 		public void run() throws Exception {
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -42,6 +43,8 @@ public class MonitorDeUnidadeConsole implements UnidadeMovelUI {
 			
 			System.out.println("Deseja medidor de metado ? (Y/N)");
 			String medidorMetano = br.readLine();
+			
+
 			
 		}
 		

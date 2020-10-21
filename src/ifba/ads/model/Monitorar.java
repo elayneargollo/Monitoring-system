@@ -6,9 +6,9 @@ import java.util.Iterator;
 import ifba.ads.controll.H2unidadeMovel;
 import ifba.ads.controll.UnidadeMovelDAO;
 
-public class Monitorar extends H2unidadeMovel  {
+public class Monitorar extends H2unidadeMovel implements UnidadeMovelLogica  {
 
-	UnidadeMovelDAO unidadeMovelDAO;
+	private UnidadeMovelDAO unidadeMovelDAO;
 	
 	public boolean respostaStatus;
 	public ArrayList<UnidadeMovel> unidades;
@@ -121,6 +121,23 @@ public class Monitorar extends H2unidadeMovel  {
 
 		unidadeQueIraSeDeslocar.setLocalizacao(longitude, latitude);
 		return unidadeQueIraSeDeslocar;
+	}
+
+	@Override
+	public void setPersistencia(UnidadeMovelDAO persistencia) throws Exception {
+		this.unidadeMovelDAO= persistencia;		
+	}
+
+	@Override
+	public void atualizar(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mover(UnidadeMovel unidade) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

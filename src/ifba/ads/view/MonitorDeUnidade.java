@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import ifba.ads.model.Monitorar;
+import ifba.ads.model.UnidadeMovelLogica;
 
 import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
@@ -23,7 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class MonitorDeUnidade extends JFrame {
+public class MonitorDeUnidade extends JFrame implements UnidadeMovelUI{
 
 	private JTextField latitude;
 	private JTextField longitude;
@@ -35,26 +36,30 @@ public class MonitorDeUnidade extends JFrame {
 	private JPanel start;
 	private String resposta;
 	private static MenuBar menuBar;
+	private UnidadeMovelLogica unidadeLogica;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+			 public void run() {
 				try {
 					MonitorDeUnidade frame = new MonitorDeUnidade();
 					menuBar = new MenuBar(frame);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
+			} 
+			
+			
 		});
 	}
+	
 
 	public MonitorDeUnidade() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 
-		setTitle("Monitoramento de Unidade Móvel");
+		setTitle("Monitoramento de Unidade Mï¿½vel");
 
 		start = new JPanel();
 		start.setPreferredSize(new Dimension(250, 360));
@@ -68,7 +73,7 @@ public class MonitorDeUnidade extends JFrame {
 		start.add(equipamento);
 		equipamento.setLayout(null);
 
-		cameraDeVideo = new JCheckBox("Câmera de Vídeo");
+		cameraDeVideo = new JCheckBox("Cï¿½mera de Vï¿½deo");
 		cameraDeVideo.setBounds(27, 23, 145, 23);
 		equipamento.add(cameraDeVideo);
 
@@ -80,7 +85,7 @@ public class MonitorDeUnidade extends JFrame {
 		medidorMetano.setBounds(27, 78, 163, 23);
 		equipamento.add(medidorMetano);
 
-		termometro = new JCheckBox("Termômetro");
+		termometro = new JCheckBox("Termï¿½metro");
 		termometro.setBounds(27, 105, 111, 23);
 		equipamento.add(termometro);
 
@@ -162,6 +167,18 @@ public class MonitorDeUnidade extends JFrame {
 
 	public float getLatitude() {
 		return Float.parseFloat(this.latitude.getText());
+	}
+
+
+	@Override
+	public void setLogica(UnidadeMovelLogica logica) throws Exception {
+		this.unidadeLogica = logica;			
+	}
+
+
+	@Override
+	public void run() throws Exception {
+		// tem um metodo igual a esse la em cima, mas nao consegui trazer pra cÃ¡, nem mudar lÃ¡		
 	}
 
 }
