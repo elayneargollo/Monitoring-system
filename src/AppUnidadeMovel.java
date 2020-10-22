@@ -23,7 +23,7 @@ public class AppUnidadeMovel {
 		logica = (UnidadeMovelLogica) (Class.forName((String) propriedade.get("LOGICA")).newInstance());
 		ui = (UnidadeMovelUI) (Class.forName((String) propriedade.get("UI")).newInstance());
 		persistencia = (UnidadeMovelDAO) (Class.forName((String) propriedade.get("PERSISTENCIA")).newInstance());
-
+		
 		logica.setPersistencia(persistencia);
 		ui.setLogica(logica);
 		ui.run();

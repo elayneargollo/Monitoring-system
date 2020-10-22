@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import ifba.ads.model.Monitorar;
+import ifba.ads.model.UnidadeMovelLogica;
 
 import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
@@ -22,9 +23,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-@SuppressWarnings("serial")
-public class MonitorDeUnidade extends JFrame {
+public class MonitorDeUnidade extends JFrame implements UnidadeMovelUI{
 
+	private UnidadeMovelLogica unidadeLogica;
 	private JTextField latitude;
 	private JTextField longitude;
 	private Monitorar areaMonitorada;
@@ -49,7 +50,7 @@ public class MonitorDeUnidade extends JFrame {
 		});
 	}
 
-	public MonitorDeUnidade() {
+	public void run() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -126,18 +127,15 @@ public class MonitorDeUnidade extends JFrame {
 							getTermomentro(), getMedidorC02(), getMedidorMetano()));
 
 					JOptionPane.showMessageDialog(null, resposta);
-					setVisible(false);
 
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(null, "Por favor, verifique sua resposta.");
-					setVisible(false);
 				}
 
 			}
 		});
 
 		setVisible(true);
-
 	}
 
 	public boolean getCamera() {
@@ -162,6 +160,11 @@ public class MonitorDeUnidade extends JFrame {
 
 	public float getLatitude() {
 		return Float.parseFloat(this.latitude.getText());
+	}
+
+	@Override
+	public void setLogica(UnidadeMovelLogica logica) throws Exception {
+		this.unidadeLogica = logica;		
 	}
 
 }
