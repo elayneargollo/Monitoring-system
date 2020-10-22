@@ -25,12 +25,10 @@ public class MonitorDeUnidadeConsole implements UnidadeMovelUI {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		System.out.println("Informe a Latitude:");
-		//Double latitude = Double.parseDouble(br.readLine());
         float latitude = Float.parseFloat(br.readLine()); 
 
 		System.out.println("Informe a Longitude da Unidade:");
-		//Double longitude = Double.parseDouble(br.readLine());
-		  float longitude = Float.parseFloat(br.readLine()); 
+		float longitude = Float.parseFloat(br.readLine()); 
 		  
 		int aux = 0;
 
