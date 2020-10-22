@@ -15,7 +15,6 @@ public class MonitorDeUnidadeConsole implements UnidadeMovelUI {
 			this.unidade = null;		
 		}
 		
-
 		@Override
 		public void setLogica(UnidadeMovelLogica logica) throws Exception {
 			this.unidadeLogica = logica;			

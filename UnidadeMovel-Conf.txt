@@ -1,3 +1,0 @@
-UI = ifba.ads.view.MonitorDeUnidade
-LOGICA = ifba.ads.model.Monitorar
-PERSISTENCIA = ifba.ads.controll.MemUnidadeMovel
