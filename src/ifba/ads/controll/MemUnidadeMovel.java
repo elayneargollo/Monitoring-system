@@ -10,7 +10,7 @@ import ifba.ads.model.UnidadeManhattan;
 import ifba.ads.model.UnidadeMovel;
 
 public class MemUnidadeMovel implements UnidadeMovelDAO {
-
+	
 	private ArrayList<UnidadeMovel> unidades = new ArrayList();
 
 	public MemUnidadeMovel() throws Exception {
@@ -29,7 +29,7 @@ public class MemUnidadeMovel implements UnidadeMovelDAO {
 		configuracao.adicionarEquipamentosAUnidade(EquipamentoEnum.CAMERADEVIDEO);
 		configuracao.adicionarEquipamentosAUnidade(EquipamentoEnum.MEDIDORDEC02);
 		configuracao2.adicionarEquipamentosAUnidade(EquipamentoEnum.MEDIDORDEC02);
-		
+	
 		this.inserir(new UnidadeEuclidiana("teste", 4, 2, configuracao));
 		this.inserir(new UnidadeManhattan("teste2", 42, 24, configuracao2));
 		this.inserir(new UnidadeEuclidiana("teste3", 3, 2, configuracao));

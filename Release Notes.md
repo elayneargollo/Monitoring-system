@@ -1,5 +1,11 @@
 # Release Notes
 
+## 0.3.1
++ interação entre as camadas
+
+## 0.3.0
++ monitoramento realiza leitura de arquivo configuração
+
 ## 0.2.1
 + Implementação do tratamento de Exceptions
 
