@@ -103,7 +103,6 @@ public class MonitorDeUnidadeConsole implements UnidadeMovelUI {
 
 		this.unidadeLogica.mover(latitude, longitude,unidadeCameraDeVideo,unidadeTermometro,unidadeMedidorCO2,unidadeMedidorMetano);
 		
-		
 	}
 
 	public static void main(String[] args) throws Exception {

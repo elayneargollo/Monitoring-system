@@ -40,19 +40,6 @@ public class AppUnidade implements UnidadeMovelLogica {
 		
 	}
 	
-	public boolean getPossuiEsseEquipamento (UnidadeMovel unidade, String equipamento) {
-		
-		boolean encontrado = false;
-		
-		if(unidade.configuracao.getEquipamentos().toString().contains(equipamento)) {
-			encontrado = true;
-		} else {
-			encontrado = false;
-		}
-		
-		return encontrado;
-	}
-	
 	@Override
 	public void setPersistencia(UnidadeMovelDAO persistencia) throws Exception {
 		this.unidadeDAO = persistencia;		
